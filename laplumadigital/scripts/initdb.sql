@@ -14,8 +14,8 @@ CREATE TABLE IF NOT EXISTS Usuario (
 
 CREATE TABLE IF NOT EXISTS UyP(
     idUsuario INT,
-    Email VARCHAR(255) NOT NULL,
-    `Password` VARCHAR(255) NOT NULL,
+    Email VARCHAR(255) NOT NULL UNIQUE,
+    `Password` VARCHAR(255) NOT NULL ,
     CONSTRAINT Fk_UyP FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario),
     CONSTRAINT Pk_UyP PRIMARY KEY (idUsuario)
 );
@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS Libros (
     Titulo VARCHAR(50) NOT NULL,
     Sinapsis VARCHAR(250) NOT NULL,
     Paginas INT NOT NULL,
+    Fecha DATE NOT NULL,
     Foto VARCHAR(255),
     CONSTRAINT FK_ALibros FOREIGN KEY (idAutores) REFERENCES Autores(idAutores)
 );
