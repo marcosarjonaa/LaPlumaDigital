@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS UyP(
 );
 
 CREATE TABLE IF NOT EXISTS Autores (
-    idAutores INT AUTO_INCREMENT PRIMARY KEY,
+    idAutor INT AUTO_INCREMENT PRIMARY KEY,
     Nombre VARCHAR(100) NOT NULL,
     FechaNac DATE NOT NULL,
     FechaFal DATE,
@@ -29,24 +29,24 @@ CREATE TABLE IF NOT EXISTS Autores (
 );
 
 CREATE TABLE IF NOT EXISTS Libros (
-    idLibros INT AUTO_INCREMENT PRIMARY KEY,
-    idAutores INT,
+    idLibro INT AUTO_INCREMENT PRIMARY KEY,
+    idAutor INT,
     Titulo VARCHAR(50) NOT NULL,
     Sinapsis VARCHAR(250) NOT NULL,
     Paginas INT NOT NULL,
     Fecha DATE NOT NULL,
     Foto VARCHAR(255),
-    CONSTRAINT FK_ALibros FOREIGN KEY (idAutores) REFERENCES Autores(idAutores)
+    CONSTRAINT FK_ALibros FOREIGN KEY (idAutor) REFERENCES Autores(idAutor)
 );
 
 CREATE TABLE IF NOT EXISTS Publicaciones(
     idPublicaciones INT AUTO_INCREMENT PRIMARY KEY,
     idUsuario INT,
-    idLibros INT,
+    idLibro INT,
     Titulo VARCHAR(50) NOT NULL,
     Contenido VARCHAR(255) NOT NULL,
     Foto VARCHAR(255),
     Likes INT NOT NULL,
     CONSTRAINT FK_UPublicaciones FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario),
-    CONSTRAINT FK_LPublicaciones FOREIGN KEY (idLibros) REFERENCES Libros(idLibros)
+    CONSTRAINT FK_LPublicaciones FOREIGN KEY (idLibro) REFERENCES Libros(idLibro)
 );

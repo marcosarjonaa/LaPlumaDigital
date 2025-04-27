@@ -17,7 +17,7 @@ exports.libros = (req, res) => {
                 if(libro.Fecha){
                     libro.Fecha = moment(libro.Fecha).format("YYYY-MM-DD");
                 }else {
-                    res.send("El libro con id: "+ libro.idLibros + 
+                    res.send("El libro con id: "+ libro.idLibro + 
                         " no tiene fecha. Por favor eliminalo de la bbdd"
                     );
                 }
@@ -32,9 +32,10 @@ exports.add = (req, res) => {
 }
 
 exports.addPost = (req, res) => {
-    const {} = req.body;  
+    const {idAutor, Titulo, Sinapsis, Paginas, Fecha, Foto} = req.body;  
     db.query(
-        'INSERT INTO Libros () VALUES ()',
+        'INSERT INTO Libros (idAutor, Titulo, Sinapsis, Paginas, Fecha, Foto) VALUES (?,?,?,?,?,?)',
+        [idAutor, Titulo, Sinapsis, Paginas, Fecha, Foto],
         (error, respuesta) => {
             if(error) {
                 res.send("Error insertando libros")
@@ -45,21 +46,65 @@ exports.addPost = (req, res) => {
     );  
 };
 
+exports.edit = (req, res) => {
+    const { idLibro } = req.params;
+    if(isNaN(idLibro)) {
+        res.send('Parámetros incorrectos en el edit de formulario')
+    } else {
+        db.query('SELECT * FROM Libros WHERE idLibro=?', [idLibro], (error, respuesta) => {
+            if (error) {
+                res.send('Error actualizando el libro');
+              } else {
+                if (respuesta.length > 0) {
+                  const libro = respuesta[0];
+                  if (libro.Fecha) {
+                    libro.Fecha = moment(libro.Fecha).format('YYYY-MM-DD');
+                  }else {
+                    res.send("El libro con id: "+ libro.idLibro + 
+                        "El libro no tiene fecha. Por favor eliminalo de la bbdd"
+                    );
+                }
+                  res.render('libros/edit', { libro });
+                } else {
+                  res.send('Error actualizando el libro, el id es inc');
+                }
+              }
+        })
+    }
+}
+
+exports.editPost= (req, res) => {
+    const {} = req.body;
+    if (isNaN(id)) {
+        res.send('Error actualizando porque el id no es un número');
+    } else {
+        db.query(
+          'UPDATE libros SET idAutor=?, Titulo=?, Sinapsis=?, Paginas=?, Fecha=?, Foto=?',
+          [idAutor, Titulo, Sinapsis, Paginas, Fecha, Foto],
+          (error) => {
+            if (error) {
+              res.send('Error en el post de actualizar: ' + error);
+            } else res.redirect('/libros');
+          }
+        );
+    }
+}
+
 exports.del = (req, res) => {
-    const { id } = req.params;
-    if(isNaN(id)){
+    const { idLibro } = req.params;
+    if(isNaN(idLibro)){
         res.send('Parámetros incorrectos')
     } else {
-        db.query('SELECT * FROM Libros WHERE idLibro=?', [id], (error, respuesta) => {
+        db.query('SELECT * FROM Libros WHERE idLibro=?', [idLibro], (error, respuesta) => {
             if (error) {
                 res.send('Error al intentar borrar');
             } else {
                 if (respuesta.length>0) {
                     const libros = respuesta[0];
-                    if (libros.fecha) {
-                        libros.fecha = moment(libros.fecha).format('YYYY-MM-DD');
+                    if (libros.Fecha) {
+                        libros.Fecha = moment(libros.Fecha).format('YYYY-MM-DD');
                     } else {
-                        res.send("El libro con id: "+ libro.idLibros + 
+                        res.send("El libro con id: "+ libro.idLibro + 
                             " no tiene fecha. Por favor eliminalo de la bbdd"
                         );
                     }
@@ -69,18 +114,15 @@ exports.del = (req, res) => {
                 }
             }
         })
-        if (resp) {
-            
-        }
     }
 }
 
 exports.delPost = () => {
-    const { id } = req.body;
-    if(isNaN(id)){
+    const { idLibro } = req.body;
+    if(isNaN(idLibro)){
         res.send('Error borrando');
     }else {
-        db.query('DELETE FROM Libros WHERE id=?', [id], (error) => {
+        db.query('DELETE FROM Libros WHERE idLibro=?', [idLibro], (error) => {
             if(error) {
                 res.send('Error en el post de borrar libro: '+ error)
             }else {

@@ -1,0 +1,26 @@
+extends ../templates/layout
+
+block head
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js")
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js")
+
+block content
+  h3 Añadir un nuevo libro
+  div
+    form(action="/libros/add", method="post")
+      label(for="titulo") Titulo:
+      input(type="text", name="titulo")
+      br
+      label(for="fPublicacion") Fecha Publicación:
+      input(type="date", name="fPublicacion")
+      br
+      label(for="precio") Precio: 
+      input(type="double", name="precio")
+      br
+      input(type="submit", value="Enviar")
+
+ 
+
+
