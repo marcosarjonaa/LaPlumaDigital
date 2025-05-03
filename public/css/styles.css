@@ -1,0 +1,100 @@
+/* Estilos generales */
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url("/images/fondo.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;   
+    background-attachment: fixed;
+    color: white;
+    font-family: Arial, sans-serif;
+    background-color: #7da041;
+}
+
+/* Header */
+.header-container {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.title {
+  color: #556B2F; /* Verde oliva fuerte */
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: #6B8E23; /* Verde oliva más claro */
+}
+
+/* Navbar */
+.navbar {
+  background-color: #556B2F; /* Verde oliva fuerte */
+  padding: 10px 0;
+  margin: 20px;
+  border: #fff 2px solid;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
+
+
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  margin-left: 20px;
+}
+
+.nav-link:hover {
+  background-color: #2f3b19;
+  padding: 10px;
+}
+
+.libros-container {
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    margin-top: 30px;
+}
+
+.tabla-libros {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+.tabla-libros th, .tabla-libros td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: left;
+    color: black;
+}
+
+.portada-img {
+    max-width: 200px;
+    height: auto;
+    border: 1px solid black;
+    background-color: white;
+}
+
+.enlace-ver, .enlace-borrar, .enlace-editar, .enlace-add {
+    text-decoration: none;
+    color: black;
+    padding: 5px 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 0 5px;
+    background-color: #f0f0f0;
+}
+
+.enlace-ver:hover, .enlace-borrar:hover, .enlace-editar:hover, .enlace-add:hover {
+    background-color: #2f3b19;
+    color: white;
+}
+

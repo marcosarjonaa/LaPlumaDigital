@@ -4,7 +4,7 @@ const moment = require('moment');
 exports.libros = (req, res) => {
     db.query('SELECT * FROM Libros', (err, response) => {
         if(err){ //Compruebo si hay algún error 
-            res.send("Ha habido un error listando los libros");
+            res.send("Ha habido un error listando los libros", err);
             // Y si lo hay mando la respuesta diciendo el fallo
         } else {
             // En caso de que no lo haya
@@ -22,7 +22,7 @@ exports.libros = (req, res) => {
                     );
                 }
             });
-            res.render('libros/listado', {libro: response});
+            res.render('libros/list', {libros: response});
         }
     })
 }
