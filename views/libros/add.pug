@@ -7,14 +7,25 @@ block content
   h3 Añadir un nuevo libro
   div
     form(action="/libros/add", method="post")
-      label(for="titulo") Titulo:
-      input(type="text", name="titulo")
+      label(for="idAutor") Autor:
+      select(name="idAutor")
+        each autor in autores
+          option(value=autor.idAutor)= autor.Nombre
       br
-      label(for="fPublicacion") Fecha Publicación:
-      input(type="date", name="fPublicacion")
+      label(for="Titulo") Titulo:
+      input(type="text", name="Titulo")
       br
-      label(for="precio") Precio: 
-      input(type="double", name="precio")
+      label(for="Sinapsis") Sinapsis:
+      input(type="text", name="Sinapsis")
+      br 
+      label(for="Paginas") Paginas: 
+      input(type="number", name="Paginas")
+      br
+      label(for="Fecha") Fecha Publicación:
+      input(type="date", name="Fecha")
+      br
+      label(for="Foto") Foto: 
+      input(type="text", name="Foto") 
       br
       input(type="submit", value="Enviar")
 

@@ -3,35 +3,31 @@ extends ../templates/layout
 block head
 
 block content
-    div.libros-container
-        h3.titulo-libros Listado de libros
-        table.tabla-libros
-            thead
-                tr
-                    th ID
-                    th Título
-                    th Sinapsis
-                    th Páginas
-                    th Fecha de Publicación
-                    th Portada
-                    th Ver 
-                    th Borrar
-                    th Editar
-            tbody 
-                each libro in libros
-                    tr 
-                        td= libro.idLibro
-                        td= libro.Titulo                        
-                        td= libro.Sinapsis
-                        td= libro.Paginas
-                        td= libro.Fecha
-                        td
-                            img(src=libro.Foto, alt="Portada", class="portada-img")
-                        td 
-                            a.enlace-ver(href=`/libros/ver/${libro.idLibro}`) Ver más detalle
-                        td 
-                            a.enlace-borrar(href=`/libros/del/${libro.idLibro}`) Borrar 
-                        td 
-                            a.enlace-editar(href=`/libros/edit/${libro.idLibro}`) Editar 
-        p 
-            a.enlace-add(href="/libros/add") Añadir un libro nuevo
+    div.contenedor-general
+        div.libros-container
+            h3.titulo-libros Listado de libros
+            table.tabla-libros
+                thead
+                    tr
+                        th Título
+                        th Sinapsis
+                        th Portada
+                        th Ver 
+                        th Editar
+                        th Borrar
+                tbody 
+                    each libro in libros
+                        tr 
+                            td= libro.Titulo                        
+                            td= libro.Sinapsis
+                            td
+                                img(src=libro.Foto, alt="Portada", class="portada-img")
+                            td 
+                                a.enlace-ver(href=`/libros/ver/${libro.idLibro}`) Ver más detalle
+                            td 
+                                a.enlace-editar(href=`/libros/edit/${libro.idLibro}`) Editar 
+                            td 
+                                a.enlace-borrar(href=`/libros/del/${libro.idLibro}`) Borrar 
+                            
+            p 
+                a.enlace-add(href="/libros/add") Añadir un libro nuevo

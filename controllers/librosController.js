@@ -28,7 +28,13 @@ exports.libros = (req, res) => {
 }
 
 exports.add = (req, res) => {
-    res.render('libros/add');
+    db.query('SELECT idAutor, Nombre FROM Autores', (err, autores)=> {
+        if (err) {
+            res.send("Hay un enviando autores"+ err)
+        } else {
+            res.render('libros/add', { autores });
+        }
+    })
 }
 
 exports.addPost = (req, res) => {
@@ -38,7 +44,7 @@ exports.addPost = (req, res) => {
         [idAutor, Titulo, Sinapsis, Paginas, Fecha, Foto],
         (error, respuesta) => {
             if(error) {
-                res.send("Error insertando libros")
+                res.send("Error insertando libros"+ error)
             } else {
                 res.redirect('/libros')
             }
@@ -47,11 +53,11 @@ exports.addPost = (req, res) => {
 };
 
 exports.edit = (req, res) => {
-    const { idLibro } = req.params;
-    if(isNaN(idLibro)) {
-        res.send('Parámetros incorrectos en el edit de formulario')
+    const id = req.params.id;
+    if(isNaN(id)) {
+        res.send('Parámetros incorrectos en el edit de formulario '+ id)
     } else {
-        db.query('SELECT * FROM Libros WHERE idLibro=?', [idLibro], (error, respuesta) => {
+        db.query('SELECT * FROM Libros WHERE idLibro=?', [id], (error, respuesta) => {
             if (error) {
                 res.send('Error actualizando el libro');
               } else {
@@ -64,8 +70,15 @@ exports.edit = (req, res) => {
                         "El libro no tiene fecha. Por favor eliminalo de la bbdd"
                     );
                 }
-                  res.render('libros/edit', { libro });
-                } else {
+                  db.query('SELECT idAutor, Nombre FROM Autores', (err, autores)=> {
+                    if (err) {
+                        res.send("No se han conseguido los autores")
+                    }else {
+                        res.render('libros/edit', { libro, autores });
+                    }
+                    })
+                } 
+                else {
                   res.send('Error actualizando el libro, el id es inc');
                 }
               }
@@ -74,13 +87,13 @@ exports.edit = (req, res) => {
 }
 
 exports.editPost= (req, res) => {
-    const {} = req.body;
+    const {id, idAutor, Titulo, Sinapsis, Paginas, Fecha, Foto} = req.body;
     if (isNaN(id)) {
-        res.send('Error actualizando porque el id no es un número');
+        res.send('Error actualizando porque el id no es un número'+ id);
     } else {
         db.query(
-          'UPDATE libros SET idAutor=?, Titulo=?, Sinapsis=?, Paginas=?, Fecha=?, Foto=?',
-          [idAutor, Titulo, Sinapsis, Paginas, Fecha, Foto],
+          'UPDATE Libros SET idAutor=?, Titulo=?, Sinapsis=?, Paginas=?, Fecha=?, Foto=? WHERE idLibro = ?',
+          [ idAutor, Titulo, Sinapsis, Paginas, Fecha, Foto, id],
           (error) => {
             if (error) {
               res.send('Error en el post de actualizar: ' + error);
@@ -91,11 +104,11 @@ exports.editPost= (req, res) => {
 }
 
 exports.del = (req, res) => {
-    const { idLibro } = req.params;
-    if(isNaN(idLibro)){
-        res.send('Parámetros incorrectos')
+    const id  = req.params.id;
+    if(isNaN(id)){
+        res.send('Parámetros incorrectos'+ id)
     } else {
-        db.query('SELECT * FROM Libros WHERE idLibro=?', [idLibro], (error, respuesta) => {
+        db.query('SELECT * FROM Libros WHERE idLibro=?', [id], (error, respuesta) => {
             if (error) {
                 res.send('Error al intentar borrar');
             } else {
@@ -104,11 +117,17 @@ exports.del = (req, res) => {
                     if (libros.Fecha) {
                         libros.Fecha = moment(libros.Fecha).format('YYYY-MM-DD');
                     } else {
-                        res.send("El libro con id: "+ libro.idLibro + 
-                            " no tiene fecha. Por favor eliminalo de la bbdd"
+                        res.send("El libro con id: "+ libros.idLibro + 
+                            "El libro no tiene fecha. Por favor eliminalo de la bbdd"
                         );
                     }
-                    res.render('libros/del', {libro: respuesta[0]})
+                    db.query('SELECT Nombre FROM Autores WHERE idAutor=?', [libros.idAutor], (err, autores)=> {
+                        if (err) {
+                            res.send("No se ha conseguido el autor")
+                        }else {
+                            res.render('libros/del', {libro: libros, autor: autores[0]})
+                        }
+                        })
                 }else {
                     res.send('Error al intentar borrar el libro')
                 }
@@ -117,14 +136,14 @@ exports.del = (req, res) => {
     }
 }
 
-exports.delPost = () => {
-    const { idLibro } = req.body;
-    if(isNaN(idLibro)){
-        res.send('Error borrando');
+exports.delPost = (req, res) => {
+    const { id } = req.body;
+    if(isNaN(id)){
+        res.send('Error borrando'+ id);
     }else {
-        db.query('DELETE FROM Libros WHERE idLibro=?', [idLibro], (error) => {
+        db.query('DELETE FROM Libros WHERE idLibro=?', [id], (error) => {
             if(error) {
-                res.send('Error en el post de borrar libro: '+ error)
+                res.send('Error en el post de borrar libro: '+id + 'y el fallo ha sido: '+ error)
             }else {
                 res.redirect('/libros');
             }
@@ -132,3 +151,6 @@ exports.delPost = () => {
     }
 };
 
+exports.ver = () => {
+
+}

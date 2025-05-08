@@ -15,6 +15,8 @@ router.post('/edit/:id', librosController.editPost);
 
 //Rutas para eliminar
 router.get('/del/:id', librosController.del);
-router.get('/del/:id', librosController.delPost)
+router.post('/del/:id', librosController.delPost)
+
+router.get('/ver/:id', librosController.ver)
 
 module.exports = router

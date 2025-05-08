@@ -7,17 +7,26 @@ block content
     h3 Borrar un libro
         div 
             form(method="post") 
+                label(for="idAutor") Autor: 
+                input(type="text", name="nombreAutor", value=`${autor.Nombre}`, disabled) 
+
+                br
                 label(for="titulo") Titulo:
-                input(type="text", name="titulo", value=`${libro.titulo}`,disabled)
+                input(type="text", name="titulo", value=`${libro.Titulo}`,disabled)
                 
                 br
-                label(for="fPublicacion") Fecha Publicacion:
-                input(type="date", name="fPublicacion", value=`${libro.fPublicacion}`,disabled)
+                label(for="Sinapsis") Sinapsis: 
+                input(type="text" name="Sinapsis", value=`${libro.Sinapsis}`, disabled) 
+
+                br
+                label(for="Paginas") Páginas: 
+                input(type="number", name="Paginas", value=`${libro.Paginas}`,disabled) 
                 
                 br
-                label(for="precio") Precio: 
-                input(type="double", name="precio", value=`${libro.precio}`,disabled) 
+                label(for="Fecha") Fecha:
+                input(type="date", name="Fecha", value=`${libro.Fecha}`,disabled)
+                
                 
                 br
-                input(type="hidden", name="id", value=`${libro.id}`)
+                input(type="hidden", name="id", value=`${libro.idLibro}`)
                 input(type="submit", value="Enviar")

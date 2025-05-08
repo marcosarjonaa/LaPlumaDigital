@@ -1,21 +1,31 @@
 extends ../templates/layout
+
 block head
 
 block content 
     h3 Editar un libro
-        div 
-            form(method="post") 
-                label(for="titulo") Titulo:
-                input(type="text", name="titulo", value=`${libro.titulo}`)
-                
-                br
-                label(for="fPublicacion") Fecha de publicación:
-                input(type="date", name="fPublicacion", value=`${libro.fPublicacion}`)
-                
-                br
-                label(for="precio") Precio: 
-                input(type="double", name="precio",value=`${libro.precio}`) 
-                
-                br
-                input(type="hidden", name="id", value=`${libro.id}`)
-                input(type="submit", value="Enviar")
+    div 
+        form(method="post") 
+            input(type="hidden", name="id", value=`${libro.idLibro}`)
+            label(for="idAutor") Autor:
+            select(name="idAutor")
+                each autor in autores
+                    option(value=`${autor.idAutor}`)= autor.Nombre
+            br
+            label(for="Titulo") Titulo:
+            input(type="text", name="Titulo", value=`${libro.Titulo}`)
+            br
+            label(for="Sinapsis") Sinapsis: 
+            input(type="double", name="Sinapsis",value=`${libro.Sinapsis}`) 
+            br
+            label(for="Paginas") Paginas:
+            input(type="number", name="Paginas", value=`${libro.Paginas}`)
+            br
+            label(for="Fecha") Fecha de publicación:
+            input(type="date", name="Fecha", value=`${libro.Fecha}`)
+            br
+            label(for="Foto") Foto:
+            input(type="text", name="Foto", value=`${libro.Foto}`)
+            br
+
+            input(type="submit", value="Enviar")

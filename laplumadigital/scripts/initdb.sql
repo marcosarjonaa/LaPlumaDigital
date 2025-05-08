@@ -2,6 +2,8 @@ CREATE DATABASE IF NOT EXISTS LaPlumaDigital;
 
 use LaPlumaDigital;
 
+ALTER DATABASE LaPlumaDigital CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 CREATE TABLE IF NOT EXISTS Usuario (
     idUsuario INT AUTO_INCREMENT PRIMARY KEY,
     UserName VARCHAR(30) NOT NULL UNIQUE,
@@ -52,7 +54,7 @@ CREATE TABLE IF NOT EXISTS Publicaciones(
 );
 
 INSERT INTO Autores (Nombre, FechaNac, FechaFal, Foto) VALUES
-('Gabriel García Márquez', '1927-03-06', '2014-04-17', 'garcia_marquez.jpg'),
+('Gabriel Garcia Marquez', '1927-03-06', '2014-04-17', 'garcia_marquez.jpg'),
 ('Mario Vargas Llosa', '1936-03-28', NULL, 'vargas_llosa.jpg'),
 ('J.K. Rowling', '1965-07-31', NULL, 'jk_rowling.jpg'),
 ('Ernest Hemingway', '1899-07-21', '1961-07-02', 'hemingway.jpg'),
