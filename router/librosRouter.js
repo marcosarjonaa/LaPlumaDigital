@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const librosController = require('../controllers/librosController');
 
-//Te lleva al crud general
+//Te lleva al listado general
 router.get('/', librosController.libros);
 
 //Rutas para añadir
@@ -17,6 +17,7 @@ router.post('/edit/:id', librosController.editPost);
 router.get('/del/:id', librosController.del);
 router.post('/del/:id', librosController.delPost)
 
+//Rutas para ver los detalles de un libro.
 router.get('/ver/:id', librosController.ver)
 
 module.exports = router

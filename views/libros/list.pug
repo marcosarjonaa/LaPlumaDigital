@@ -21,7 +21,7 @@ block content
                             td= libro.Titulo                        
                             td= libro.Sinapsis
                             td
-                                img(src=libro.Foto, alt="Portada", class="portada-img")
+                                img(src=libro.Foto, alt="Portada", class="portada-img", style="max-width: 300px; margin-bottom: 20px;")
                             td 
                                 a.enlace-ver(href=`/libros/ver/${libro.idLibro}`) Ver más detalle
                             td 

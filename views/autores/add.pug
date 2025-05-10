@@ -1,0 +1,26 @@
+extends ../templates/layout
+
+block head
+
+
+block content
+  h3 Añadir un nuevo Autor
+  div
+    form(action="/autores/add", method="post")
+      label(for="Nombre") Nombre:
+      input(type="text", name="Nombre")
+      br 
+      label(for="FechaNac") Fechade nacimiento:
+      input(type="date", name="FechaNac")
+      br
+      label(for="FechaFal") Fecha de fallecimiento:
+      input(type="date", name="FechaFal")
+      br
+      label(for="Foto") Foto: 
+      input(type="text", name="Foto") 
+      br
+      input(type="submit", value="Enviar")
+
+ 
+
+

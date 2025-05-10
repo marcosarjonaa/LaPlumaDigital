@@ -1,55 +1,48 @@
 const db = require('../db.js');
 const moment = require('moment');
 
-exports.libros = (req, res) => {
-    db.query('SELECT * FROM Libros', (err, response) => {
+exports.autores = (req, res) => {
+    db.query('SELECT * FROM Autores', (err, response) => {
         if(err){ //Compruebo si hay algún error 
-            res.send("Ha habido un error listando los libros", err);
+            res.send("Ha habido un error listando los autore", err);
             // Y si lo hay mando la respuesta diciendo el fallo
         } else {
-            // En caso de que no lo haya
-            response.forEach(libro => {
-                /*
-                    Compruebo que si los libros tienen fecha
-                    y si tienen, que debería, lo que hago es 
-                    formatearla para que cumpla el formato que quiero
-                */
-                if(libro.Fecha){
-                    libro.Fecha = moment(libro.Fecha).format("YYYY-MM-DD");
-                }else {
-                    res.send("El libro con id: "+ libro.idLibro + 
-                        " no tiene fecha. Por favor eliminalo de la bbdd"
-                    );
-                }
-            });
-            res.render('libros/list', {libros: response});
+            res.render('autores/list', {autores: response});
         }
     })
 }
 
 exports.add = (req, res) => {
-    db.query('SELECT idAutor, Nombre FROM Autores', (err, autores)=> {
-        if (err) {
-            res.send("Hay un enviando autores"+ err)
-        } else {
-            res.render('libros/add', { autores });
-        }
-    })
+    res.render('autores/add');
 }
 
 exports.addPost = (req, res) => {
-    const {idAutor, Titulo, Sinapsis, Paginas, Fecha, Foto} = req.body;  
-    db.query(
-        'INSERT INTO Libros (idAutor, Titulo, Sinapsis, Descripcion, Paginas, Fecha, Foto) VALUES (?,?,?,?,?,?)',
-        [idAutor, Titulo, Sinapsis, Descripcion, Paginas, Fecha, Foto],
-        (error, respuesta) => {
-            if(error) {
-                res.send("Error insertando libros"+ error)
-            } else {
-                res.redirect('/libros')
+    const {idAutor, Nombre, FechaNac, FechaFal, Foto} = req.body;
+    if(FechaFal && FechaFal.trim() !== ''){
+        db.query(
+            'INSERT INTO Autores (idAutor, Nombre, FechaNac, FechaFal, Foto) VALUES (?,?,?,?,?)',
+            [idAutor, Nombre, FechaNac, FechaFal, Foto],
+            (error, respuesta) => {
+                if(error) {
+                    res.send("Error insertando un autor"+ error)
+                } else {
+                    res.redirect('/autores')
+                }
             }
-        }
-    );  
+        );  
+    } else {
+        db.query(
+            'INSERT INTO Autores (idAutor, Nombre, FechaNac, Foto) VALUES (?,?,?,?)',
+            [idAutor, Nombre, FechaNac, Foto],
+            (error, respuesta) => {
+                if(error) {
+                    res.send("Error insertando un autor"+ error)
+                } else {
+                    res.redirect('/autores')
+                }
+            }
+        ); 
+    }
 };
 
 exports.edit = (req, res) => {
@@ -70,16 +63,9 @@ exports.edit = (req, res) => {
                         "El libro no tiene fecha. Por favor eliminalo de la bbdd"
                     );
                 }
-                  db.query('SELECT idAutor, Nombre FROM Autores', (err, autores)=> {
-                    if (err) {
-                        res.send("No se han conseguido los autores")
-                    }else {
-                        res.render('libros/edit', { libro, autores });
-                    }
-                    })
-                } 
-                else {
-                  res.send('Error actualizando el libro, el id es inc');
+                    res.render('autores/edit', { libro });
+                } else {
+                  res.send('Error actualizando el utor, el id es incoherente');
                 }
               }
         })

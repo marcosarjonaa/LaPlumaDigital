@@ -42,8 +42,6 @@ body {
   padding: 0;
 }
 
-
-
 .nav-link {
   color: white;
   text-decoration: none;
@@ -56,6 +54,8 @@ body {
   padding: 10px;
 }
 
+
+/* Cabecerea */
 .titular {
   display: flex;
   justify-content: center;
@@ -76,7 +76,7 @@ body {
 }
 
 
-
+/* Conteneedor de flex */
 .contenedor-general {
   display: flex;
   justify-content: center;
@@ -85,6 +85,7 @@ body {
   color: black;
 }
 
+/* Libros */
 .libros-container {
     width: 1200px;
     padding: 20px;
@@ -97,7 +98,7 @@ body {
 .tabla-libros {
     color: black;
     border-collapse: collapse;
-    background-color: white;
+    background-color: rgb(255, 255, 255, 0.7);
 }
 
 .tabla-libros th, .tabla-libros td {
@@ -108,25 +109,86 @@ body {
     width: 300px;
 }
 
-.portada-img {
-    max-width: 200px;
-    height: auto;
-    border: 1px solid black;
-    background-color: white;
+/* Autores */
+.autores-container {
+  width: 1200px;
+  padding: 20px;
+  color: black;
+  border-radius: 10px;
+  margin-top: 30px;
+  background-color: rgb(255, 255, 255, 0.5);
 }
 
-.enlace-ver, .enlace-borrar, .enlace-editar, .enlace-add {
+.tabla-autores {
+  color: black;
+  border-collapse: collapse;
+  background-color: rgb(255, 255, 255, 0.7);
+}
+
+.tabla-autores th, .tabla-autores td {
+  border: 1px solid black;
+  padding: 10px;
+  text-align: left;
+  color: black;
+  width: 300px;
+}
+
+/* Partes de los CRUDS*/
+.enlace-ver, .enlace-editar, .enlace-add {
     text-decoration: none;
     color: black;
     padding: 5px 10px;
     border: 1px solid black;
     border-radius: 5px;
-    margin: 0 5px;
+
     background-color: #f0f0f0;
 }
 
-.enlace-ver:hover, .enlace-borrar:hover, .enlace-editar:hover, .enlace-add:hover {
+.enlace-borrar {
+  text-decoration: none;
+  color: rgb(255, 0, 0);
+  padding: 5px 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+
+  background-color: white;
+}
+
+.enlace-borrar:hover {
+  background-color: red;
+  color: white;
+}
+
+.enlace-ver:hover, .enlace-editar:hover, .enlace-add:hover {
     background-color: #2f3b19;
     color: white;
 }
 
+/* Detalles */
+.estructura-detalles {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: black;
+}
+
+.detalle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  width: 750px;
+  background-color: rgb(255, 255, 255, 0.7);
+  color: black;
+  border-radius: 15px;
+  padding: 15px;
+  margin: 20px;
+}
+
+.detalle p {
+  background-color: white;
+  padding: 5px;
+  border-radius: 5px;
+  margin-left: 10px;
+}

@@ -10,7 +10,8 @@ const mysql = require('mysql2');
 const bodyParser = require('body-parser');
 const path = require('path');
 
-const librosRouter = require('./router/librosRouter')
+const librosRouter = require('./router/librosRouter');
+const autoresRouter = require('./router/autoresRouter');
 
 require('dotenv').config({ path: './laplumadigital/.env' });
 
@@ -28,6 +29,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
     Redireccionamiento a rutas: 
 */
 app.use('/libros', librosRouter)
+app.use('/autores', autoresRouter)
 
 app.get('/', (req, res) => {
     res.render('index')

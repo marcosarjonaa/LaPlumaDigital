@@ -1,0 +1,22 @@
+extends ../templates/layout
+
+block head
+
+block content 
+    h3 Editar un Autor
+    div 
+        form(method="post") 
+            input(type="hidden", name="id", value=`${autor.idAutor}`)
+            label(for="Nombre") Nombre:
+            input(type="text", name="Nombre", value=`${autor.Nombre}`)
+            br
+            label(for="FechaNac") Fecha de nacimiento:
+            input(type="date", name="Fecha", value=`${libro.FechaNac}`)
+            br
+            label(for="FechaFal") Fecha de defunción (Opcional):
+            input(type="date", name="Fecha", value=`${auto.FechaFal}`)
+            br
+            label(for="Foto") Foto:
+            input(type="text", name="Foto", value=`${autor.Foto}`)
+            br
+            input(type="submit", value="Enviar")
