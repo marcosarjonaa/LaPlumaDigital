@@ -5,6 +5,7 @@ exports.register = (req, res) => {
     res.render('register/register')
 }
 
+//Para hacer el post del registro
 exports.registerPost = (req, res) => {
     const { UserName, Nombre, Descripcion, Email, Contraseña, Foto } = req.body;
     if (!UserName || !Nombre || !Email || !Contraseña || !Descripcion) {
