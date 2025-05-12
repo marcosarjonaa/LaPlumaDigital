@@ -48,22 +48,25 @@ exports.addPost = (req, res) => {
 exports.edit = (req, res) => {
     const id = req.params.id;
     if(isNaN(id)) {
-        res.send('Parámetros incorrectos en el edit de formulario '+ id)
+        res.send('Id no es un numero '+ id)
     } else {
-        db.query('SELECT * FROM Libros WHERE idLibro=?', [id], (error, respuesta) => {
+        db.query('SELECT * FROM Autores WHERE idAutor=?', [id], (error, respuesta) => {
             if (error) {
                 res.send('Error actualizando el libro');
               } else {
                 if (respuesta.length > 0) {
-                  const libro = respuesta[0];
-                  if (libro.Fecha) {
-                    libro.Fecha = moment(libro.Fecha).format('YYYY-MM-DD');
+                  const autor = respuesta[0];
+                  if (autor.FechaNac) {
+                    autor.FechaNac = moment(autor.FechaNac).format('YYYY-MM-DD');
+                    if(autor.FechaFal){
+                        autor.FechaFal = moment(autor.FechaFal).format('YYYY-MM-DD')
+                    }
                   }else {
-                    res.send("El libro con id: "+ libro.idLibro + 
-                        "El libro no tiene fecha. Por favor eliminalo de la bbdd"
+                    res.send("El autor con id: "+ autor.idAutor + 
+                        "El autor no tiene fecha de nacimiento. Por favor eliminalo de la bbdd"
                     );
                 }
-                    res.render('autores/edit', { libro });
+                    res.render('autores/edit', { autor});
                 } else {
                   res.send('Error actualizando el utor, el id es incoherente');
                 }
@@ -73,19 +76,31 @@ exports.edit = (req, res) => {
 }
 
 exports.editPost= (req, res) => {
-    const {id, idAutor, Titulo, Sinapsis, Descripcion, Paginas, Fecha, Foto} = req.body;
-    if (isNaN(id)) {
+    const {idAutor, Nombre, FechaNac, FechaFal, Foto} = req.body;
+    if (isNaN(idAutor)) {
         res.send('Error actualizando porque el id no es un número'+ id);
     } else {
-        db.query(
-          'UPDATE Libros SET idAutor=?, Titulo=?, Sinapsis=?, Descripcion=?,  Paginas=?, Fecha=?, Foto=? WHERE idLibro = ?',
-          [ idAutor, Titulo, Sinapsis, Descripcion, Paginas, Fecha, Foto, id],
-          (error) => {
-            if (error) {
-              res.send('Error en el post de actualizar: ' + error);
-            } else res.redirect('/libros');
-          }
-        );
+        if(FechaFal && FechaFal.trim() !== ''){
+            db.query(
+              'UPDATE Autor SET idAutor=?, Nombre=?, FechaNac=?, FechaFal=?, Foto=? WHERE idAutor = ?',
+              [ idAutor, Nombre, FechaNac, FechaFal, Foto, idAutor],
+              (error) => {
+                if (error) {
+                  res.send('Error en el post de actualizar: ' + error);
+                } else res.redirect('/autores');
+              }
+            );
+        } else {
+            db.query(
+                'UPDATE Autor SET idAutor=?, Nombre=?, FechaNac=?, Foto=? WHERE idAutor = ?',
+                [ idAutor, Nombre, FechaNac, Foto, idAutor],
+                (error) => {
+                  if (error) {
+                    res.send('Error en el post de actualizar: ' + error);
+                  } else res.redirect('/autores');
+                }
+              );
+        }
     }
 }
 
@@ -94,26 +109,23 @@ exports.del = (req, res) => {
     if(isNaN(id)){
         res.send('Parámetros incorrectos'+ id)
     } else {
-        db.query('SELECT * FROM Libros WHERE idLibro=?', [id], (error, respuesta) => {
+        db.query('SELECT * FROM Autores WHERE idAutor=?', [id], (error, respuesta) => {
             if (error) {
                 res.send('Error al intentar borrar');
             } else {
                 if (respuesta.length>0) {
-                    const libros = respuesta[0];
-                    if (libros.Fecha) {
-                        libros.Fecha = moment(libros.Fecha).format('YYYY-MM-DD');
+                    const autor = respuesta[0];
+                    if (autor.FechaNac) {
+                        autor.FechaNac = moment(autor.FechaNac).format('YYYY-MM-DD');
+                        if(autor.FechaFal){
+                            autor.FechaFal = moment(autor.FechaFal).format('YYYY-MM-DD')
+                        }
+                        res.render('autores/del', {autor: autor})
                     } else {
-                        res.send("El libro con id: "+ libros.idLibro + 
-                            "El libro no tiene fecha. Por favor eliminalo de la bbdd"
+                        res.send("El autor con id: "+ autor.idAutor + 
+                            " no tiene fecha. Por favor eliminalo de la bbdd"
                         );
                     }
-                    db.query('SELECT Nombre FROM Autores WHERE idAutor=?', [libros.idAutor], (err, autores)=> {
-                        if (err) {
-                            res.send("No se ha conseguido el autor")
-                        }else {
-                            res.render('libros/del', {libro: libros, autor: autores[0]})
-                        }
-                        })
                 }else {
                     res.send('Error al intentar borrar el libro')
                 }
@@ -127,11 +139,11 @@ exports.delPost = (req, res) => {
     if(isNaN(id)){
         res.send('Error borrando'+ id);
     }else {
-        db.query('DELETE FROM Libros WHERE idLibro=?', [id], (error) => {
+        db.query('DELETE FROM Autor WHERE idAutor=?', [id], (error) => {
             if(error) {
-                res.send('Error en el post de borrar libro: '+id + 'y el fallo ha sido: '+ error)
+                res.send('Error en el post de borrar autor: '+id + ', comprueba que no tenga libros que sigan creados')
             }else {
-                res.redirect('/libros');
+                res.redirect('/autor');
             }
         });
     }
@@ -142,28 +154,27 @@ exports.ver = (req, res) => {
     if (isNaN(id)) {
         res.send('Error buscando la id: ' + id)
     } else {
-        db.query('SELECT * FROM  Libros WHERE idLibro=?', [id], (error, libros) => {
+        db.query('SELECT * FROM  Autores WHERE idAutor=?', [id], (error, respuesta) => {
             if (error) {
-                res.send("Ha habido un fallo buscando el libro"+ error)
+                res.send("Ha habido un fallo buscando el autor"+ error)
             } else {
-                if (libros.length > 0) {
-                    const libro = libros[0];
-                    if (libro.Fecha) {
-                      libro.Fecha = moment(libro.Fecha).format('YYYY-MM-DD');
+                if (respuesta.length > 0) {
+                    const autor = respuesta[0];
+                    if (autor.FechaNac) {
+                      autor.FechaNac = moment(autor.FechaNac).format('YYYY-MM-DD');
+                      if(autor.FechaFal){
+                        autor.FechaFal = moment(autor.FechaFal).format('YYYY-MM-DD')
+                        res.render('autores/ver', { autor: autor, fechaFal: autor.FechaFal});
+                        }else {
+                            res.render('autores/ver', { autor: autor, fechaFal: "Actualidad"});
+                        }
                     }else {
-                      res.send("El libro con id: "+ libro.idLibro + 
-                          "El libro no tiene fecha. Por favor eliminalo de la bbdd"
+                      res.send("El autor con id: "+ autor.idAutor + 
+                          "El autor no tiene fecha. Por favor eliminalo de la bbdd"
                       );
                     } 
-                    db.query('SELECT Nombre FROM Autores where idAutor=?', [libro.idAutor], (error, autor) => {
-                        if(error){
-                            res.send("Fallo a la hora de encontrar el autor")
-                        }else {
-                            res.render('libros/ver', { libro: libro, autor: autor[0].Nombre });
-                        }
-                    })
                 } else {
-                    res.send('Error actualizando el libro, el id es inc');
+                    res.send('Error actualizando el autor no ha sido econtrado');
                   }
             }
         })

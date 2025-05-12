@@ -111,7 +111,7 @@ body {
 
 /* Autores */
 .autores-container {
-  width: 1200px;
+  width: 900px;
   padding: 20px;
   color: black;
   border-radius: 10px;
@@ -173,6 +173,14 @@ body {
   color: black;
 }
 
+.borde1 {
+  border: 3px solid black;
+}
+
+.borde2 {
+  border: 3px dotted black;
+}
+
 .detalle {
   display: flex;
   justify-content: center;
@@ -184,6 +192,7 @@ body {
   border-radius: 15px;
   padding: 15px;
   margin: 20px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
 }
 
 .detalle p {
@@ -191,4 +200,5 @@ body {
   padding: 5px;
   border-radius: 5px;
   margin-left: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
 }

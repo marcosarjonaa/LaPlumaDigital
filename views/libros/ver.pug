@@ -3,8 +3,10 @@ extends ../templates/layout
 block head
 
 block content
-    div.estructura-detalles
-        h1= libro.Titulo
-        div.detalle
-            img(src=libro.Foto, alt="Portada", class="portada-img", style="max-width: 400px; margin-bottom: 20px;")
-            p= libro.Descripcion + "                               El libro tiene " + libro.Paginas + " páginas. Fue escrito por: "+autor+". Lo publicó el día: "+libro.Fecha
+    div.tamano
+        div.estructura-detalles
+            h1= libro.Titulo
+            div.detalle
+                img(src=libro.Foto, alt="Portada", class="portada-img", style="max-width: 400px; margin-bottom: 20px;")
+                p.borde= "Sinópsis: " +libro.Descripcion 
+                p.borde2="El libro tiene " + libro.Paginas + " páginas. Fue escrito por: "+autor+". Lo publicó el día: "+libro.Fecha

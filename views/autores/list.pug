@@ -20,7 +20,7 @@ block content
                         tr 
                             td= autor.Nombre                        
                             td
-                                img(src=autor.Foto, alt="Portada", class="portada-img", style="width: 350px; height: 400px; margin-bottom: 20px;")
+                                img(src=autor.Foto, alt="Portada", class="portada-img", style="width: 200px; height: 250px; margin-bottom: 20px;")
                             td 
                                 a.enlace-ver(href=`/autores/ver/${autor.idAutor}`) Ver más detalle
                             td 
@@ -29,4 +29,4 @@ block content
                                 a.enlace-borrar(href=`/autores/del/${autor.idAutor}`) Borrar 
                             
             p 
-                a.enlace-add(href="/autores/add") Añadir un libro nuevo
+                a.enlace-add(href="/autores/add") Añadir un autor nuevo

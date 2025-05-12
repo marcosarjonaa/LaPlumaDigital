@@ -12,6 +12,9 @@ const path = require('path');
 
 const librosRouter = require('./router/librosRouter');
 const autoresRouter = require('./router/autoresRouter');
+//const miPerfilRouter = require('./router/miperfilrouter');
+//const rankingRouter = require('./router/rankingrouter');
+//const sobrenosotrosRouter = require('./router/sobrenosotrosRouter')
 
 require('dotenv').config({ path: './laplumadigital/.env' });
 
@@ -30,6 +33,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 */
 app.use('/libros', librosRouter)
 app.use('/autores', autoresRouter)
+//app.use('/perfil', miPerfilRouter)
+//app.use('/ranking', rankingRouter)
+//app.use('/sobrenosotros', sobrenosotrosRouter)
+
 
 app.get('/', (req, res) => {
     res.render('index')

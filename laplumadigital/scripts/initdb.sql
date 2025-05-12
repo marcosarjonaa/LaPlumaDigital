@@ -8,8 +8,8 @@ CREATE TABLE IF NOT EXISTS Usuario (
     idUsuario INT AUTO_INCREMENT PRIMARY KEY,
     UserName VARCHAR(30) NOT NULL UNIQUE,
     Nombre VARCHAR(100) NOT NULL,
-    Foto VARCHAR(255),
-    Descripcion VARCHAR(255),
+    Foto VARCHAR(255) NOT NULL,
+    Descripcion VARCHAR(255) NOT NULL,
     Permitido BOOLEAN NOT NULL,
     Tipo ENUM('Admin','Modder','Usuario')
 );
@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS Usuario (
 CREATE TABLE IF NOT EXISTS UyP(
     idUsuario INT,
     Email VARCHAR(255) NOT NULL UNIQUE,
-    `Password` VARCHAR(255) NOT NULL ,
+    Contraseña VARCHAR(255) NOT NULL ,
     CONSTRAINT Fk_UyP FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario),
     CONSTRAINT Pk_UyP PRIMARY KEY (idUsuario)
 );

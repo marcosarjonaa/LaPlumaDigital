@@ -38,7 +38,7 @@ exports.add = (req, res) => {
 }
 
 exports.addPost = (req, res) => {
-    const {idAutor, Titulo, Sinapsis, Paginas, Fecha, Foto} = req.body;  
+    const {idAutor, Titulo, Sinapsis, Descripcion, Paginas, Fecha, Foto} = req.body;  
     db.query(
         'INSERT INTO Libros (idAutor, Titulo, Sinapsis, Descripcion, Paginas, Fecha, Foto) VALUES (?,?,?,?,?,?)',
         [idAutor, Titulo, Sinapsis, Descripcion, Paginas, Fecha, Foto],

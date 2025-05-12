@@ -4,7 +4,7 @@ block head
 
 block content
     div.estructura-detalles
-        h1= libro.Titulo
+        h1= autor.Nombre
         div.detalle
-            img(src=libro.Foto, alt="Portada", class="portada-img", style="max-width: 400px; margin-bottom: 20px;")
-            p= libro.Descripcion + "                               El libro tiene " + libro.Paginas + " páginas. Fue escrito por: "+autor+". Lo publicó el día: "+libro.Fecha
+            img(src=autor.Foto, alt="Portada", class="portada-img", style="max-width: 400px; margin-bottom: 20px;")
+            p= autor.Nombre + " vivió desde " + autor.FechaNac + "-" + `${fechaFal}`
