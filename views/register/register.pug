@@ -1,0 +1,32 @@
+extends ../templates/layout
+
+block head
+
+
+block content
+  h1 Registrate con nosotros
+  div
+    form(action="/register", method="post")
+      label(for="UserName") Username:
+      input(type="text", name="UserName")
+      br 
+      label(for="Nombre") Nombre:
+      input(type="text", name="Nombre")
+      br
+      label(for="Descripcion") Descripcion:
+      input(type="text", name="Descripcion")
+      br
+      label(for="Email") Email:
+      input(type="text", name="Email")
+      br
+      label(for="Contraseña") Contraseña:
+      input(type="password", name="Contraseña")
+      br
+      label(for="Foto") Foto: 
+      input(type="text", name="Foto") 
+      br
+      input(type="submit", value="Registrate!!")
+
+ 
+
+

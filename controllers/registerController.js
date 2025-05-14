@@ -1,15 +1,15 @@
 const db = require('../db.js');
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 
 exports.register = (req, res) => {
     res.render('register/register')
 }
 
-//Para hacer el post del registro
 exports.registerPost = (req, res) => {
     const { UserName, Nombre, Descripcion, Email, Contraseña, Foto } = req.body;
     if (!UserName || !Nombre || !Email || !Contraseña || !Descripcion) {
-        return res.send('Todos los campos son obligatorios');
+        return res.send('Todos los campos son obligatorios'+ UserName + ' ' + Nombre + ' ' + Descripcion 
+            + ' ' + Email + ' ' + Contraseña );
     }
  
     db.query('SELECT * FROM UyP WHERE Email = ?', [Email], (err, respuesta) => {
@@ -34,10 +34,11 @@ exports.registerPost = (req, res) => {
                     }
                     const userId = result.insertId;
                     db.query(
-                        'INSERT INTO UyP (idUsuario, Email, Contraseña) VALUES (?, ?, ?)',
+                        'INSERT INTO UyP (idUsuario, Email, Contrasena) VALUES (?, ?, ?)',
                         [userId, Email, hashedPassword],
                         (err) => {
                             if (err) {
+                                console.log("Ha fallado insertando a UyP")
                                 return res.send('Error al guardar las credenciales: ' + err);
                             }
                             return res.render('login/login');
@@ -48,4 +49,3 @@ exports.registerPost = (req, res) => {
         });
     });
 };
-
