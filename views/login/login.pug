@@ -1,0 +1,19 @@
+extends ../templates/layout
+
+block head
+
+block content
+  h1 Inicia sesión en tu cuenta
+  div
+    form(action="/login", method="post")
+      label(for="Email") Email:
+      input(type="text", name="Email")
+      br
+      label(for="Contrasena") Contraseña:
+      input(type="text", name="Contrasena")
+      br
+      input(type="submit", value="Inicia sesión!!")
+
+ 
+
+

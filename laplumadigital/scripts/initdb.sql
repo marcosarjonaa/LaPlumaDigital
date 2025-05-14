@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS Usuario (
 CREATE TABLE IF NOT EXISTS UyP(
     idUsuario INT,
     Email VARCHAR(255) NOT NULL UNIQUE,
-    Contraseña VARCHAR(255) NOT NULL ,
+    Contrasena VARCHAR(255) NOT NULL ,
     CONSTRAINT Fk_UyP FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario),
     CONSTRAINT Pk_UyP PRIMARY KEY (idUsuario)
 );
