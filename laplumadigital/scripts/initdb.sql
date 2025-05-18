@@ -8,11 +8,15 @@ CREATE TABLE IF NOT EXISTS Usuario (
     idUsuario INT AUTO_INCREMENT PRIMARY KEY,
     UserName VARCHAR(30) NOT NULL UNIQUE,
     Nombre VARCHAR(100) NOT NULL,
-    Foto VARCHAR(255) NOT NULL,
     Descripcion VARCHAR(255) NOT NULL,
+    Foto VARCHAR(1000) NOT NULL,
     Permitido BOOLEAN NOT NULL,
     Tipo ENUM('Admin','Modder','Usuario')
 );
+INSERT INTO Usuario (UserName, Nombre, Descripcion, Foto, Permitido, Tipo) VALUES
+('Marcos', 'Marcos Arjona Comino', 'Este es marcos el creador', 'https://backsubbetica.novacreative.es/images/municipios/GvaJMjci6g5xrTDgpH6HO7BNQ8fxtdunp2q071LH.jpg', 1, 'Admin'),
+('Laura', 'Laura Jimenez Muñoz', 'Soy la pareja de Marcos el creador', 'https://www.tiendanimal.es/articulos/wp-content/uploads/2024/03/cachorro-de-golden-retriever-foto.jpg', 1, 'Modder'),
+('Pepe', 'Pepe Perez Perez', 'Soy Pepe Perez Perez', 'https://upload.wikimedia.org/wikipedia/commons/5/55/Pepe_2018.jpg', 1, 'Usuario');
 
 CREATE TABLE IF NOT EXISTS UyP(
     idUsuario INT,
@@ -21,6 +25,10 @@ CREATE TABLE IF NOT EXISTS UyP(
     CONSTRAINT Fk_UyP FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario),
     CONSTRAINT Pk_UyP PRIMARY KEY (idUsuario)
 );
+INSERT INTO UyP (idUsuario, Email, Contrasena) VALUES
+(1, 'marcos@laplumadigital.com', '$2a$10$SDOOZ7cedJFcuqcNG8xdYOZO3gQvA7RJKMdChrrcuobRkunGwxuFS'),
+(2, 'laurajimu05@gmail.com', '$2a$10$KKMj/ZHYFU7kE86H5eKeB.uEa5g/Cs7Fclkekvdu76U6X4XBbjC1O'),
+(3, 'pepeperez@gmail.com', '$2a$10$RdnvksEHIhNXzAsCFmZiRunlU2Hjc6EYauSNn/Cn8hGLMfb93XkBC');
 
 CREATE TABLE IF NOT EXISTS Autores (
     idAutor INT AUTO_INCREMENT PRIMARY KEY,
@@ -29,6 +37,14 @@ CREATE TABLE IF NOT EXISTS Autores (
     FechaFal DATE,
     Foto VARCHAR(255)
 );
+INSERT INTO Autores (Nombre, FechaNac, FechaFal, Foto) VALUES
+('Gabriel García Márquez', '1927-03-06', '2014-04-17', 'https://upload.wikimedia.org/wikipedia/commons/0/0f/Gabriel_Garcia_Marquez.jpg'),
+('Mario Vargas Llosa', '1936-03-28', '2025-04-13', 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Mario_Vargas_Llosa_%28crop_2%29.jpg/960px-Mario_Vargas_Llosa_%28crop_2%29.jpg'),
+('J.K. Rowling', '1965-07-31', NULL, 'https://m.media-amazon.com/images/S/amzn-author-media-prod/8cigckin175jtpsk3gs361r4ss.jpg'),
+('Ernest Hemingway', '1899-07-21', '1961-07-02', 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Ernest_Hemingway_1923_passport_photo.jpg/250px-Ernest_Hemingway_1923_passport_photo.jpg'),
+('Miguel de Cervantes', '1547-09-29', '1616-04-22', 'https://wmagazin.com/wp-content/uploads/2022/06/AV-ppal-Cervantes-Santiago-Munoz-Machado.2022.jpg');
+
+
 
 CREATE TABLE IF NOT EXISTS Libros (
     idLibro INT AUTO_INCREMENT PRIMARY KEY,
@@ -41,27 +57,6 @@ CREATE TABLE IF NOT EXISTS Libros (
     Foto VARCHAR(255),
     CONSTRAINT FK_ALibros FOREIGN KEY (idAutor) REFERENCES Autores(idAutor)
 );
-
-CREATE TABLE IF NOT EXISTS Publicaciones(
-    idPublicaciones INT AUTO_INCREMENT PRIMARY KEY,
-    idUsuario INT,
-    idLibro INT,
-    Titulo VARCHAR(50) NOT NULL,
-    Contenido VARCHAR(255) NOT NULL,
-    Foto VARCHAR(255),
-    Likes INT NOT NULL,
-    CONSTRAINT FK_UPublicaciones FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario),
-    CONSTRAINT FK_LPublicaciones FOREIGN KEY (idLibro) REFERENCES Libros(idLibro)
-);
-
-INSERT INTO Autores (Nombre, FechaNac, FechaFal, Foto) VALUES
-('Gabriel García Márquez', '1927-03-06', '2014-04-17', 'https://upload.wikimedia.org/wikipedia/commons/0/0f/Gabriel_Garcia_Marquez.jpg'),
-('Mario Vargas Llosa', '1936-03-28', '2025-04-13', 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Mario_Vargas_Llosa_%28crop_2%29.jpg/960px-Mario_Vargas_Llosa_%28crop_2%29.jpg'),
-('J.K. Rowling', '1965-07-31', NULL, 'https://m.media-amazon.com/images/S/amzn-author-media-prod/8cigckin175jtpsk3gs361r4ss.jpg'),
-('Ernest Hemingway', '1899-07-21', '1961-07-02', 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Ernest_Hemingway_1923_passport_photo.jpg/250px-Ernest_Hemingway_1923_passport_photo.jpg'),
-('Miguel de Cervantes', '1547-09-29', '1616-04-22', 'https://wmagazin.com/wp-content/uploads/2022/06/AV-ppal-Cervantes-Santiago-Munoz-Machado.2022.jpg');
-
-
 INSERT INTO Libros (idAutor, Titulo, Sinapsis, Descripcion, Paginas, Fecha, Foto) VALUES
 (1, 'Cien años de soledad', 
  'La saga de la familia Buendía en el mítico Macondo.',
@@ -107,3 +102,21 @@ INSERT INTO Libros (idAutor, Titulo, Sinapsis, Descripcion, Paginas, Fecha, Foto
  'Una colección de relatos cortos con crítica social y sátira.',
  'Novelas ejemplares es una colección de doce relatos escritos por Miguel de Cervantes. Cada historia, aunque distinta en estilo y trama, ofrece una lección moral o social, siendo “ejemplares” por su contenido edificante. Mezclando comedia, romanticismo, sátira y realismo, Cervantes retrata la sociedad de su época con ironía y profundidad. Los temas van desde el honor y la fidelidad hasta la locura, el engaño y la justicia. Esta colección demuestra la versatilidad del autor y su habilidad para captar los matices de la condición humana.', 
  384, '1613-01-01', 'https://m.media-amazon.com/images/I/91iyp46q8VL.jpg');
+
+
+CREATE TABLE IF NOT EXISTS Publicaciones(
+    idPublicaciones INT AUTO_INCREMENT PRIMARY KEY,
+    idUsuario INT,
+    idLibro INT,
+    idAutor INT,
+    Titulo VARCHAR(50) NOT NULL,
+    Contenido VARCHAR(1000) NOT NULL,
+    Foto VARCHAR(255),
+    Likes INT NOT NULL,
+    CONSTRAINT FK_UPublicaciones FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario),
+    CONSTRAINT FK_LPublicaciones FOREIGN KEY (idLibro) REFERENCES Libros(idLibro),
+    CONSTRAINT FK_APublicaciones FOREIGN KEY (idAutor) REFERENCES Autores(idAutor)
+);
+
+INSERT INTO Publicaciones (idUsuario, idLibro, idAutor, Titulo, Contenido, Foto, Likes) VALUES
+(1, 1, 1, 'Lo que me pareció Cien años de soledad','Cien años de soledad del grandísimo escriptor Gabriel García Márquez, me ha parecido una de las mejores obras literarias de la historia. Un libro muy interesante desde el minuto uno que empiezas a leerlo', 'https://m.media-amazon.com/images/I/81foacR0CPL.jpg', 3);

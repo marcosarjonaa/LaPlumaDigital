@@ -5,29 +5,36 @@ block head
 block content
     div.contenedor-general
         div.libros-container
-            h3.titulo-libros Listado de libros
-            table.tabla-libros
+            h2.titulo-libros Listado de Libros
+            h4 ¡Encuentra tus libros favoritos!
+            table.tabla-libros(border='1', cellpadding='10', cellspacing='0')
                 thead
                     tr
                         th Título
                         th Sinapsis
                         th Portada
                         th Ver 
-                        th Editar
-                        th Borrar
+                        if tipo == 'Modder' || tipo == 'Admin'
+                            th Editar
+                        if tipo == 'Admin'
+                            th Borrar
                 tbody 
                     each libro in libros
                         tr 
-                            td= libro.Titulo                        
-                            td= libro.Sinapsis
+                            td
+                                h2= libro.Titulo                        
+                            td
+                                h4=libro.Sinapsis
                             td
                                 img(src=libro.Foto, alt="Portada", class="portada-img", style="width: 225px; height: 300px; margin-bottom: 20px;")
                             td 
                                 a.enlace-ver(href=`/libros/ver/${libro.idLibro}`) Ver más detalle
-                            td 
-                                a.enlace-editar(href=`/libros/edit/${libro.idLibro}`) Editar 
-                            td 
-                                a.enlace-borrar(href=`/libros/del/${libro.idLibro}`) Borrar 
-                            
-            p 
-                a.enlace-add(href="/libros/add") Añadir un libro nuevo
+                            if tipo == 'Modder' || tipo == 'Admin'
+                                td 
+                                    a.enlace-editar(href=`/libros/edit/${libro.idLibro}`) Editar 
+                            if tipo == 'Admin'
+                                td 
+                                    a.enlace-borrar(href=`/libros/del/${libro.idLibro}`) Borrar 
+            if tipo == 'Modder' || tipo == 'Admin'
+                p 
+                    a.enlace-add(href="/libros/add") Añadir un libro nuevo

@@ -23,4 +23,7 @@ nav.navbar
     li
       a.nav-link(href="/sobreNosotros") Sobre Nosotros
     li
-      a.nav-link(href="/auth/logout") Cerrar Sesión
+      if usuarioAutenticado
+        a.nav-link(href="/logout") Cerrar sesión
+      else
+        a.nav-link(href="/login") Iniciar sesión

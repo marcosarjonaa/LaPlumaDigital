@@ -17,6 +17,7 @@ const registerRouter = require('./router/registerRouter');
 const loginRouter = require('./router/loginRouter');
 const librosRouter = require('./router/librosRouter');
 const autoresRouter = require('./router/autoresRouter');
+const rankingRouter = require('./router/rankingRouter')
 
 const app = express();
 const port = process.env.SERVICE_PORT;
@@ -35,6 +36,7 @@ app.use('/register', registerRouter);
 app.use('/login', loginRouter);
 app.use('/libros', librosRouter);
 app.use('/autores', autoresRouter);
+app.use('/rankings', rankingRouter)
 
 app.get('/', (req, res) => {
     res.render('index');

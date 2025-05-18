@@ -7,26 +7,31 @@ block content
         div.autores-container
             h2.titulo-libros Listado de Autores
             h4 ¡Encuentra tus autores favoritos!
-            table.tabla-autores
+            table.tabla-autores(border='1', cellpadding='10', cellspacing='0')
                 thead
                     tr
                         th Nombre
                         th Foto
                         th Ver 
-                        th Editar
-                        th Borrar
+                        if tipo == 'Modder' || tipo == 'Admin'
+                            th Editar
+                        if tipo == 'Admin'
+                            th Borrar
                 tbody 
                     each autor in autores
                         tr 
-                            td= autor.Nombre                        
+                            td
+                                h3= autor.Nombre                        
                             td
                                 img(src=autor.Foto, alt="Portada", class="portada-img", style="width: 200px; height: 250px; margin-bottom: 20px;")
                             td 
                                 a.enlace-ver(href=`/autores/ver/${autor.idAutor}`) Ver más detalle
-                            td 
-                                a.enlace-editar(href=`/autores/edit/${autor.idAutor}`) Editar 
-                            td 
-                                a.enlace-borrar(href=`/autores/del/${autor.idAutor}`) Borrar 
-                            
-            p 
-                a.enlace-add(href="/autores/add") Añadir un autor nuevo
+                            if tipo == 'Modder' || tipo == 'Admin'
+                                td 
+                                    a.enlace-editar(href=`/autores/edit/${autor.idAutor}`) Editar 
+                            if tipo == 'Admin'
+                                td 
+                                    a.enlace-borrar(href=`/autores/del/${autor.idAutor}`) Borrar 
+            if tipo == 'Modder' || tipo == 'Admin'
+                p 
+                    a.enlace-add(href="/autores/add") Añadir un autor nuevo
