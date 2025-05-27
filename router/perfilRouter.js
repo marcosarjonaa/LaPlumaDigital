@@ -4,5 +4,6 @@ const perfilController = require('../controllers/perfilController');
 
 
 router.get('/', perfilController.perfil)
+router.post('/del/:id', perfilController.del)
 
 module.exports = router;

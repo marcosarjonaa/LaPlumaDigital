@@ -240,7 +240,7 @@ body {
   border-bottom: 1px solid black;
 }
 .perfil-wrapper {
-  max-width: 1200px;
+  max-width: 1800px;
   margin: 50px;
   padding: 30px;
   background: white;
@@ -272,14 +272,18 @@ body {
 .descripcion {
   flex: 1;
   font-size: 1rem;
-  background: #f9f9f9;
+  background: #e9e8e8;
   padding: 20px;
   border-radius: 12px;
   border: 1px solid #ccc;
 }
 
+.descripcion h3 {
+  align-items: center;
+}
+
 .publicaciones {
-  flex: 3;
+  flex: 4;
 }
 
 .mini-portada {
@@ -308,4 +312,12 @@ body {
   text-decoration: none;
   transition: background-color 0.3s;
   margin-left: 500px;
+}
+
+.hero-imagen {
+  background-image: url('/images/banner.jpg'); /* Cambia al path correcto */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
 }

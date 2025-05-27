@@ -26,6 +26,24 @@ block content
               tr 
                 td.final(colspan="2")
                   img(src=publicacion.Foto, alt="ImagenUsuario", class="foto-publicacion")
-                  a.enlace-borrar2(href=`/publicaciones/del/${publicacion.idPublicaciones}`) Borrar 
+                  form(method="POST", action=`/perfil/del/${publicacion.idPublicaciones}`)
+                      button.enlace-borrar2(type="submit") Borrar
                   hr
-            
+      div.descripcion
+        h3 🏆 Ranking personal 🏆
+        table(border="1", cellpadding="10", cellspacing="0")
+            thead
+                tr
+                    th Posicion
+                    th Nombre
+                    th Foto
+                    th Cantidad
+            tbody
+                each ranking in rankings
+                    tr
+                        td= ranking.ranking
+                        td= ranking.Titulo
+                        td
+                            a(href=`/libros/ver/${ranking.idLibro}`) 
+                                img(src=ranking.Foto, alt="Portada", class="portada-img", style="width: 150px; height: 200px; margin-bottom: 20px;")
+                        td= ranking.contador

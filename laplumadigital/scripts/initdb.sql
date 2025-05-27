@@ -110,13 +110,12 @@ CREATE TABLE IF NOT EXISTS Publicaciones(
     Titulo VARCHAR(50) NOT NULL,
     Contenido VARCHAR(1000) NOT NULL,
     Foto VARCHAR(255),
-    Likes INT NOT NULL,
     CONSTRAINT FK_UPublicaciones FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario),
     CONSTRAINT FK_LPublicaciones FOREIGN KEY (idLibro) REFERENCES Libros(idLibro),
     CONSTRAINT FK_APublicaciones FOREIGN KEY (idAutor) REFERENCES Autores(idAutor)
 );
 
-INSERT INTO Publicaciones (idUsuario, idLibro, idAutor, Titulo, Contenido, Foto, Likes) VALUES
-(1, 1, 1, 'Lo que me pareció Cien años de soledad','Cien años de soledad del grandísimo escriptor Gabriel García Márquez, me ha parecido una de las mejores obras literarias de la historia. Un libro muy interesante desde el minuto uno que empiezas a leerlo', 'https://m.media-amazon.com/images/I/81foacR0CPL.jpg', 3),
-(1, 1, 1, 'Lo que me pareció Cien años de soledad','Cien años de soledad del grandísimo escriptor Gabriel García Márquez, me ha parecido una de las mejores obras literarias de la historia. Un libro muy interesante desde el minuto uno que empiezas a leerlo', 'https://m.media-amazon.com/images/I/81foacR0CPL.jpg', 3),
-(1, 1, 1, 'Lo que me pareció Cien años de soledad','Cien años de soledad del grandísimo escriptor Gabriel García Márquez, me ha parecido una de las mejores obras literarias de la historia. Un libro muy interesante desde el minuto uno que empiezas a leerlo', 'https://m.media-amazon.com/images/I/81foacR0CPL.jpg', 3);
+INSERT INTO Publicaciones (idUsuario, idLibro, idAutor, Titulo, Contenido, Foto) VALUES
+(1, 1, 1, 'Lo que me pareció Cien años de soledad','Cien años de soledad del grandísimo escriptor Gabriel García Márquez, me ha parecido una de las mejores obras literarias de la historia. Un libro muy interesante desde el minuto uno que empiezas a leerlo', 'https://m.media-amazon.com/images/I/81foacR0CPL.jpg'),
+(1, 8, 3, 'Harry Potter y la piedra filosofal','Harry potter y la cámara secreta es un muy buen libro de fantasía fusionando la magia con la fantasía de forma impecable. El segundo libro de una saga que nunca será olvidada', 'https://m.media-amazon.com/images/I/61IphOTR0+L._AC_UF894,1000_QL80_.jpg'),
+(1, 5, 5, 'Don Quijote de la Mancha','Don Quijote de la Mancha es uno de los libros más vendidos del mundo. Este libro cuenta la historias ficticias que cree vivir don Quijote debia a la locura que tiene causada por las novelas de caballeros', 'https://images.cdn2.buscalibre.com/fit-in/360x360/c0/63/c0633c2d4dd430b32d5e02475461f030.jpg');
