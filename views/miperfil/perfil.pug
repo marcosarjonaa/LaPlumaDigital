@@ -1,0 +1,31 @@
+extends ../templates/layout
+
+block content
+  div.perfil-wrapper
+    div.perfil-header
+      img(src=usuario.Foto, alt="ImagenUsuario", class="foto-perfil")
+      h1= "¡Bienvenido a tu perfil " + usuario.Nombre + "!"
+
+    div.perfil-body
+      div.descripcion
+        | #{usuario.Descripcion}
+
+      div.publicaciones
+        table
+          thead
+            tr 
+              th Publicaciones
+          tbody
+            each publicacion in publicaciones
+              tr
+                td
+                  img(src=usuario.Foto, alt="Portada", class="mini-portada") 
+                  | #{publicacion.Titulo}
+              tr 
+                td(colspan="2")= publicacion.Contenido
+              tr 
+                td.final(colspan="2")
+                  img(src=publicacion.Foto, alt="ImagenUsuario", class="foto-publicacion")
+                  a.enlace-borrar2(href=`/publicaciones/del/${publicacion.idPublicaciones}`) Borrar 
+                  hr
+            

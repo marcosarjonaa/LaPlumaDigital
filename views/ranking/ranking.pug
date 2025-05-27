@@ -7,38 +7,42 @@ block content
     div.div-ranking
         h1 🏆 Ranking de Libros 🏆
         table
-            thead 
-                tr 
-                th Libros 
-                th Autor
+            thead
+                tr
+                    th Libros 
+                    th Autor
             tbody
-                td 
+                td.td-union 
                     table.table-rankings(border='1', cellpadding='10', cellspacing='0')
                         thead
                         tr
                             th Posición
                             th Nombre del libro
+                            th Veces nombrado
                             th Foto del libro y enlace
                         tbody
                             each ranking in rankings
                                 tr
                                     td= ranking.ranking
                                     td= ranking.Titulo
+                                    td= ranking.contador
                                     td
                                         a(href=`/libros/ver/${ranking.idLibro}`) 
                                             img(src=ranking.Foto, alt="Portada", class="portada-img", style="width: 150px; height: 200px; margin-bottom: 20px;")
-                td 
+                td.td-union
                     table.table-rankings(border='1', cellpadding='10', cellspacing='0')
                         thead
                         tr
                             th Posición
                             th Autor
-                            th Foto del Autor
-                        tbody
+                            th Veces nombrado
+                            th Foto del Autor y enlace
+                        tbody 
                             each rank in rankA
                                 tr
                                     td= rank.ranking
                                     td= rank.Nombre
+                                    td= rank.contador
                                     td
                                         a(href=`/autores/ver/${rank.idAutor}`)
                                             img(src=rank.Foto, alt="Portada", class="portada-img", style="width: 150px; height: 200px; margin-bottom: 20px;")

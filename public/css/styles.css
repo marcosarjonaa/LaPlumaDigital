@@ -1,190 +1,175 @@
-/* Estilos generales */
 body {
-    margin: 0;
-    padding: 0;
-    background-image: url("/images/fondo.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;   
-    background-attachment: fixed;
-    color: white;
-    font-family: Arial, sans-serif;
-    background-color: #7da041;
+  margin: 0;
+  padding: 0;
+  background-color: #e5e5e5;
+  color: #1e1e1e;
+  font-family: 'Segoe UI', 'Arial', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* Header */
 .header-container {
   text-align: center;
-  margin-top: 30px;
+  margin-top: 40px;
 }
 
 .title {
-  color: #556B2F; /* Verde oliva fuerte */
+  font-size: 2.2rem;
+  color: #4a7c59;
   margin-bottom: 10px;
 }
 
 .subtitle {
-  color: #6B8E23; /* Verde oliva más claro */
+  font-size: 1.2rem;
+  color: #666;
 }
 
-/* Navbar */
 .navbar {
-  background-color: #556B2F; /* Verde oliva fuerte */
-  padding: 10px 0;
-  margin: 20px;
-  border: #fff 2px solid;
+  background-color: #4a7c59;
+  padding: 15px 0;
+  box-shadow: 0 15px 8px rgba(0,0,0,0.35);
+  margin: 0;
+  width: 100%;
 }
 
 .nav-list {
-  list-style: none;
   display: flex;
   justify-content: center;
+  gap: 30px;
+  list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .nav-link {
-  color: white;
+  color: #fff;
   text-decoration: none;
-  font-weight: bold;
-  margin-left: 20px;
+  font-weight: 500;
+  padding: 10px 16px;
+  border-radius: 6px;
+  transition: background-color 0.3s;
 }
 
 .nav-link:hover {
-  background-color: #2f3b19;
-  padding: 10px;
+  background-color: #3a6348;
 }
 
-
-/* Cabecerea */
 .titular {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  color: black;
-  margin-top: 30px;
-  background-color: rgba(255, 255, 255, 0.5);
-}
-
-.imagen {
-  width: 450px;
-  background-color: beige;
-  margin: 10px;
-  display: flex;
-  align-items: center;
-  border-radius: 20px;
-}
-
-
-/* Conteneedor de flex */
-.contenedor-general {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  color: black;
-}
-
-/* Libros */
-.libros-container {
+  width: 275px;
+  height: 250px;
   text-align: center;
-  width: 1200px;
-  padding: 20px;
-  color: black;
+  background-color: #4a7c59;
+  color: #ffffff;
+  margin: 10px auto 20px auto;
+  padding: 10px 0 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+.nombre-sitio {
+  color: #4a7c59;
+  font-weight: bold;
+}
+
+.logo-sitio {
+  max-width: 500px;
+  margin-top: 20px;
   border-radius: 10px;
-  margin-top: 30px;
-  background-color: rgb(255, 255, 255, 0.5);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
 }
 
-.tabla-libros {
-    text-align: center;
-    color: black;
-    border-collapse: collapse;
-    padding: 10px;
-    background-color: rgb(255, 255, 255);
-}
-
-.tabla-libros th, .tabla-libros td {
-    border: 1px solid black;
-    text-align: center;
-    padding: 10px;
-    text-align: left;
-    color: black;
-    width: 300px;
-}
-
-/* Autores */
-.autores-container {
-  text-align: center;
-  width: 900px;
-  padding: 20px;
-  color: black;
-  border-radius: 10px;
-  margin-top: 30px;
-  background-color: rgb(255, 255, 255, 0.5);
-}
-
-.tabla-autores {
-  color: black;
-  border-collapse: collapse;
-  background-color: rgb(255, 255, 255);
-  padding: 10px;
-}
-
-.tabla-autores th, .tabla-autores td {
-  border: 1px solid black;
-  padding: 10px;
+.libros-container,
+.autores-container,
+.div-ranking,
+.centro,
+.centro2,
+.tamano {
+  width: 90%;
+  max-width: 1000px;
+  background-color: #ffffff;
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
   text-align: left;
-  color: black;
-  width: 300px;
 }
 
-/* Partes de los CRUDS*/
-.enlace-ver, .enlace-editar, .enlace-add {
-    text-decoration: none;
-    color: black;
-    padding: 5px 10px;
-    border: 1px solid black;
-    border-radius: 5px;
+.tabla-libros,
+.tabla-autores,
+.table-rankings {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
 
-    background-color: #f0f0f0;
+.tabla-libros th, .tabla-libros td,
+.tabla-autores th, .tabla-autores td {
+  border: none;
+  padding: 14px 18px;
+  background-color: #fafafa;
+}
+
+.tabla-libros th, .tabla-autores th {
+  text-align: left;
+  font-weight: 600;
+  background-color: #f2f2f2;
+  color: #4a7c59;
+}
+
+.enlace-ver,
+.enlace-editar,
+.enlace-add,
+.enlace-registrar,
+.enlace-enviar {
+  display: inline-block;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  text-decoration: none;
+  background-color: #4a7c59;
+  color: #fff;
+  transition: background-color 0.3s;
+}
+
+.enlace-ver:hover,
+.enlace-editar:hover,
+.enlace-add:hover,
+.enlace-registrar:hover,
+.enlace-enviar:hover {
+  background-color: #3a6348;
 }
 
 .enlace-borrar {
+  background-color: #ffecec;
+  color: #d00;
+  padding: 10px 18px;
+  border-radius: 6px;
   text-decoration: none;
-  color: rgb(255, 0, 0);
-  padding: 5px 10px;
-  border: 1px solid black;
-  border-radius: 5px;
-
-  background-color: white;
+  transition: background-color 0.3s;
 }
 
 .enlace-borrar:hover {
-  background-color: red;
+  background-color: #d00;
   color: white;
 }
 
-.enlace-ver:hover, .enlace-editar:hover, .enlace-add:hover {
-    background-color: #2f3b19;
-    color: white;
-}
-
-/* Detalles */
 .estructura-detalles {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  color: black;
+  color: #1e1e1e;
 }
 
 .borde1 {
-  border: 3px solid black;
+  border: 2px solid #4a7c59;
 }
 
 .borde2 {
-  border: 3px dotted black;
+  border: 2px dotted #4a7c59;
 }
 
 .detalle {
@@ -192,36 +177,135 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  width: 750px;
-  background-color: rgb(255, 255, 255, 0.7);
-  color: black;
-  border-radius: 15px;
-  padding: 15px;
-  margin: 20px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+  width: 90%;
+  max-width: 800px;
+  background-color: #fbfbfb;
+  color: #1e1e1e;
+  border-radius: 16px;
+  padding: 20px;
+  margin: 20px auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
 }
 
 .detalle p {
-  background-color: white;
-  padding: 5px;
+  background-color: #ffffff;
+  padding: 8px 12px;
   border-radius: 5px;
   margin-left: 10px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
-/* Rankings */
-.table-rankings {
+.centro,
+.centro2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.perfil-imagen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Roboto', sans-serif;
+  width: 1250px;
+}
+.perfil-imagen h1 {
+  padding-left: 30px;
+}
+
+.perfil-publicaciones {
   background-color: white;
-  color: black;
+  border: 1px solid #ccc;
   padding: 10px;
-  margin: 10px;
+  width: 500px;
 }
 
-.div-ranking {
-  background-color: rgb(255, 255, 255, 0.7);
-  text-align: center;
-  color: black;
-  width: 900px;
-  padding: 10px;
-  margin: 10px;
+.td-union {
+  padding: 0px 10px 0 10px;
+}
+
+.perfil-titulo {
+  padding: 10px 10px 20px 10px ;  
+  border-bottom: 1px solid black;
+}
+.perfil-contenido {
+  padding: 10px 10px 20px 10px ;  
+}
+
+.perfil-tamano {
+  max-width: 1000px;
+}
+
+.perfil-imagen {
+  align-items: center;
+  border-bottom: 1px solid black;
+}
+.perfil-wrapper {
+  max-width: 1200px;
+  margin: 50px;
+  padding: 30px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.perfil-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 20px;
+}
+
+.foto-perfil {
+  width: 300px;
+  height: 300px;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+.perfil-body {
+  display: flex;
+  gap: 40px;
+  margin-top: 30px;
+}
+
+.descripcion {
+  flex: 1;
+  font-size: 1rem;
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+}
+
+.publicaciones {
+  flex: 3;
+}
+
+.mini-portada {
+  width: 40px;
+  height: 30px;
+  border-radius: 6px;
+  margin-right: 10px;
+}
+
+.foto-publicacion {
+  width: 150px;
+  height: 200px;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+
+.final {
+  padding: 30px;
+}
+
+.enlace-borrar2 {
+  background-color: #ffecec;
+  color: #d00;
+  padding: 10px 18px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  margin-left: 500px;
 }

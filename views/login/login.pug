@@ -1,19 +1,21 @@
 extends ../templates/layout
-
+ 
 block head
 
 block content
-  h1 Inicia sesión en tu cuenta
-  div
-    form(action="/login", method="post")
-      label(for="Email") Email:
-      input(type="text", name="Email")
-      br
-      label(for="Contrasena") Contraseña:
-      input(type="password", name="Contrasena")
-      br
-      input(type="submit", value="Inicia sesión!!")
-
- 
-
-
+  div.centro2
+    div.tamano
+      h1 Inicia sesión en tu cuenta
+      form(action="/login", method="post")
+        label(for="Email") Email:
+        input(type="text", name="Email")
+        br
+        br
+        label(for="Contrasena") Contraseña:
+        input(type="password", name="Contrasena")
+        br
+        br
+        input.enlace-enviar(type="submit", value="Inicia sesión!!")
+        br
+        br
+        a.enlace-registrar(href='/register') ¿Aún no tienes cuenta? Registrate aquí!!

@@ -3,7 +3,7 @@ const moment = require('moment');
 
 exports.ranking = (req, res) => {
     db.query(
-        'SELECT RANK() OVER (ORDER BY COUNT(p.idLibro) DESC) as ranking, l.Titulo, l.Foto, p.idLibro as idLibro FROM Publicaciones p JOIN Libros l ON p.idLibro = l.idLibro GROUP BY p.idLibro ORDER BY COUNT(p.idLibro) DESC'
+        'SELECT RANK() OVER (ORDER BY COUNT(p.idLibro) DESC) as ranking, COUNT(*) as contador, l.Titulo, l.Foto, p.idLibro as idLibro FROM Publicaciones p JOIN Libros l ON p.idLibro = l.idLibro GROUP BY p.idLibro, l.Titulo, l.Foto ORDER BY COUNT(p.idLibro) DESC'
     , (err, rank)=> {
         if (err) {
             return res.send('Fallo a la hora del ranking' + err)
@@ -12,7 +12,7 @@ exports.ranking = (req, res) => {
             return res.send('Fallo en la respuesta')
         }
         db.query(
-            'SELECT RANK() OVER (ORDER BY COUNT(p.idAutor) DESC) as ranking, a.Nombre, a.Foto, p.idAutor as idAutor FROM Publicaciones p JOIN Autores a ON a.idAutor = p.idAutor GROUP BY p.idAutor ORDER BY COUNT(p.idAutor) DESC',
+            'SELECT RANK() OVER (ORDER BY COUNT(p.idAutor) DESC) as ranking, COUNT(*) as contador, a.Nombre, a.Foto, p.idAutor as idAutor FROM Publicaciones p JOIN Autores a ON a.idAutor = p.idAutor GROUP BY p.idAutor, a.Nombre, a.Foto ORDER BY COUNT(p.idAutor) DESC',
             (err, rankA) => {
                 if(err){
                     return res.send('Fallo a la hora del ranking autores' + err)

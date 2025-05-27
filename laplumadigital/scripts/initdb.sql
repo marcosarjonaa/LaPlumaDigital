@@ -8,13 +8,13 @@ CREATE TABLE IF NOT EXISTS Usuario (
     idUsuario INT AUTO_INCREMENT PRIMARY KEY,
     UserName VARCHAR(30) NOT NULL UNIQUE,
     Nombre VARCHAR(100) NOT NULL,
-    Descripcion VARCHAR(255) NOT NULL,
+    Descripcion VARCHAR(1000) NOT NULL,
     Foto VARCHAR(1000) NOT NULL,
     Permitido BOOLEAN NOT NULL,
     Tipo ENUM('Admin','Modder','Usuario')
 );
 INSERT INTO Usuario (UserName, Nombre, Descripcion, Foto, Permitido, Tipo) VALUES
-('Marcos', 'Marcos Arjona Comino', 'Este es marcos el creador', 'https://backsubbetica.novacreative.es/images/municipios/GvaJMjci6g5xrTDgpH6HO7BNQ8fxtdunp2q071LH.jpg', 1, 'Admin'),
+('Marcos', 'Marcos Arjona Comino', 'Soy el creador de la pluma digital, la plataforma que estas usando. Soy un lector ocasional con ganas de aprender más acerca de los libros de estilos como la fantaía o la ciencia ficcion', 'https://backsubbetica.novacreative.es/images/municipios/GvaJMjci6g5xrTDgpH6HO7BNQ8fxtdunp2q071LH.jpg', 1, 'Admin'),
 ('Laura', 'Laura Jimenez Muñoz', 'Soy la pareja de Marcos el creador', 'https://www.tiendanimal.es/articulos/wp-content/uploads/2024/03/cachorro-de-golden-retriever-foto.jpg', 1, 'Modder'),
 ('Pepe', 'Pepe Perez Perez', 'Soy Pepe Perez Perez', 'https://upload.wikimedia.org/wikipedia/commons/5/55/Pepe_2018.jpg', 1, 'Usuario');
 
@@ -43,8 +43,6 @@ INSERT INTO Autores (Nombre, FechaNac, FechaFal, Foto) VALUES
 ('J.K. Rowling', '1965-07-31', NULL, 'https://m.media-amazon.com/images/S/amzn-author-media-prod/8cigckin175jtpsk3gs361r4ss.jpg'),
 ('Ernest Hemingway', '1899-07-21', '1961-07-02', 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Ernest_Hemingway_1923_passport_photo.jpg/250px-Ernest_Hemingway_1923_passport_photo.jpg'),
 ('Miguel de Cervantes', '1547-09-29', '1616-04-22', 'https://wmagazin.com/wp-content/uploads/2022/06/AV-ppal-Cervantes-Santiago-Munoz-Machado.2022.jpg');
-
-
 
 CREATE TABLE IF NOT EXISTS Libros (
     idLibro INT AUTO_INCREMENT PRIMARY KEY,
@@ -119,4 +117,6 @@ CREATE TABLE IF NOT EXISTS Publicaciones(
 );
 
 INSERT INTO Publicaciones (idUsuario, idLibro, idAutor, Titulo, Contenido, Foto, Likes) VALUES
+(1, 1, 1, 'Lo que me pareció Cien años de soledad','Cien años de soledad del grandísimo escriptor Gabriel García Márquez, me ha parecido una de las mejores obras literarias de la historia. Un libro muy interesante desde el minuto uno que empiezas a leerlo', 'https://m.media-amazon.com/images/I/81foacR0CPL.jpg', 3),
+(1, 1, 1, 'Lo que me pareció Cien años de soledad','Cien años de soledad del grandísimo escriptor Gabriel García Márquez, me ha parecido una de las mejores obras literarias de la historia. Un libro muy interesante desde el minuto uno que empiezas a leerlo', 'https://m.media-amazon.com/images/I/81foacR0CPL.jpg', 3),
 (1, 1, 1, 'Lo que me pareció Cien años de soledad','Cien años de soledad del grandísimo escriptor Gabriel García Márquez, me ha parecido una de las mejores obras literarias de la historia. Un libro muy interesante desde el minuto uno que empiezas a leerlo', 'https://m.media-amazon.com/images/I/81foacR0CPL.jpg', 3);

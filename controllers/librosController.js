@@ -177,7 +177,7 @@ exports.ver = (req, res) => {
                         }
                     })
                 } else {
-                    res.send('Error actualizando el libro, el id es inc');
+                    res.send('Error actualizando el libro, el id es int');
                   }
             }
         })
