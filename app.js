@@ -18,7 +18,9 @@ const loginRouter = require('./router/loginRouter');
 const librosRouter = require('./router/librosRouter');
 const autoresRouter = require('./router/autoresRouter');
 const rankingRouter = require('./router/rankingRouter');
-const perfilRouter = require('./router/perfilRouter')
+const perfilRouter = require('./router/perfilRouter');
+const subeTuLibroRouter = require('./router/subeTuLibroRouter');
+const indexRouter = require('./router/indexRouter');
 
 const app = express();
 const port = process.env.SERVICE_PORT;
@@ -39,6 +41,8 @@ app.use('/libros', librosRouter);
 app.use('/autores', autoresRouter);
 app.use('/rankings', rankingRouter)
 app.use('/perfil', perfilRouter)
+app.use('/subeTuLibro', subeTuLibroRouter)
+app.use('/', indexRouter);
 
 app.get('/', (req, res) => {
     res.render('index');

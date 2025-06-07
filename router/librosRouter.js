@@ -20,4 +20,7 @@ router.post('/del/:id', librosController.delPost)
 //Rutas para ver los detalles de un libro.
 router.get('/ver/:id', librosController.ver)
 
+//Ruta para buscar un libro según titulo
+router.post('/verLibro', librosController.buscar)
+
 module.exports = router

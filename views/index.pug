@@ -3,8 +3,24 @@ extends templates/layout
 block head
 
 block content
-  .text-center
-    h3 
-      span Bienvenido, espero que te guste 
-      b La Pluma digital
-    img(src="/images/logo.png" alt="Logo" style="max-width: 700px; margin-bottom: 20px;")
+  div.perfil-wrapper
+    div.perfil-body
+      div.publicaciones
+          table
+            thead
+              tr 
+                th Publicaciones
+            tbody
+              each publicacion in publicaciones
+                tr
+                  td
+                    img(src=publicaciones.fotoUsuario, alt="Portada", class="mini-portada") 
+                    | #{publicacion.Titulo}
+                tr 
+                  td(colspan="2")= publicacion.Contenido
+                tr 
+                  td.final(colspan="2")
+                    img(src=publicacion.fotoLibro, alt="ImagenUsuario", class="foto-publicacion")
+                    form(method="POST", action=`/perfil/del/${publicacion.idPublicaciones}`)
+                        button.enlace-borrar2(type="submit") Borrar
+                    hr

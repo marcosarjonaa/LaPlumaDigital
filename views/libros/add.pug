@@ -4,36 +4,39 @@ block head
 
 
 block content
-  h3 Añadir un nuevo libro
-  div
-    form(action="/libros/add", method="post")
-      label(for="idAutor") Autor:
-      select(name="idAutor")
-        each autor in autores
-          option(value=autor.idAutor)= autor.Nombre
-      br
-      label(for="Titulo") Titulo:
-      input(type="text", name="Titulo")
-      br
-      label(for="Sinapsis") Sinapsis:
-      input(type="text", name="Sinapsis")
-
-      br
-      label(for="Descripcion") Descripcion: 
-      input(type="text", name="Descripcion") 
-
-      br 
-      label(for="Paginas") Paginas: 
-      input(type="number", name="Paginas")
-      br
-      label(for="Fecha") Fecha Publicación:
-      input(type="date", name="Fecha")
-      br
-      label(for="Foto") Foto: 
-      input(type="text", name="Foto") 
-      br
-      input(type="submit", value="Enviar")
-
- 
-
-
+  div.centro
+      div.tamano        
+        h3 Añadir un nuevo libro
+        div
+          form(action="/libros/add", method="post")
+            label(for="idAutor") Autor:
+            select(name="idAutor")
+              each autor in autores
+                option(value=autor.idAutor)= autor.Nombre
+            br
+            br
+            label(for="Titulo") Titulo:
+            input(type="text", name="Titulo")
+            br
+            br
+            label(for="Sinapsis") Sinapsis:
+            input(type="text", name="Sinapsis")
+            br
+            br
+            label(for="Descripcion") Descripcion: 
+            input(type="text", name="Descripcion") 
+            br
+            br 
+            label(for="Paginas") Paginas: 
+            input(type="number", name="Paginas")
+            br
+            br
+            label(for="Fecha") Fecha Publicación:
+            input(type="date", name="Fecha")
+            br
+            br
+            label(for="Foto") Foto: 
+            input(type="text", name="Foto") 
+            br
+            br
+            input.enlace-registrar(type="submit", value="Enviar")

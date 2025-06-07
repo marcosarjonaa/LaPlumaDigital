@@ -180,3 +180,53 @@ exports.ver = (req, res) => {
         })
     }
 }
+
+exports.buscar = (req, res) => {
+    const nombre = req.body.nombre.trim()
+    if (nombre=="" || nombre==" "){
+        return res.send("Error por nombre vacia")
+    }
+    db.query(
+        'SELECT * FROM Autores WHERE LOWER(nombre)=?', [nombre.toLowerCase()], (error, autores) => {
+            if(error){
+                return res.send('Fallo en la busqueda de autores')
+            }
+            else {
+                if (autores.length === 1) {
+                    const autor = autores[0];
+                    if (autor.FechaNac) {
+                        autor.FechaNac = moment(autor.FechaNac).format('YYYY-MM-DD');
+                            if(autor.FechaFal){
+                                autor.FechaFal = moment(autor.FechaFal).format('YYYY-MM-DD')
+                            }
+                        }else {
+                            return res.send("El autor con id: "+ autor.idAutor + 
+                                "El autor no tiene fecha. Por favor eliminalo de la bbdd"
+                            );
+                      }
+                    db.query('SELECT * FROM Libros WHERE idAutor=?', [autor.idAutor], (error, libros) => {
+                        if(error){
+                            return res.send("Fallo a la hora de encontrar libros del autor")
+                        }
+                        if(libros.length > 0) {
+                            libros.forEach(libro => {
+                                if(libro.Fecha){
+                                    libro.Fecha = moment(libro.Fecha).format("YYYY-MM-DD");
+                                }else {
+                                    return res.send("El libro con id: "+ libro.idLibro + 
+                                        " no tiene fecha. Por favor eliminalo de la bbdd"
+                                    );
+                                }
+                            });
+                            res.render('autores/ver', { autor: autor, libros: libros })
+                        } else {
+                            return res.send("Fallo a la hora de encontrar el autor")
+                        }
+                    })
+                }else {
+                    return res.send('Ha habido un fallo con la busqueda del libro. Intentalo de nuevo')
+                }
+            }
+        }
+    )
+}

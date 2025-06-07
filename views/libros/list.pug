@@ -7,6 +7,11 @@ block content
         div.libros-container
             h2.titulo-libros Listado de Libros
             h4 ¡Encuentra tus libros favoritos!
+            div.tamano
+                form(action="/libros/verLibro", method="POST")
+                    h3 Busca aquí tu libro favorito (titulo completo)
+                    input(type="text", name="busqueda", placeholder="Buscar...", required)
+                    button(type="submit").enlace-enviar2 Buscar
             table.tabla-libros(border='1', cellpadding='10', cellspacing='0')
                 thead
                     tr

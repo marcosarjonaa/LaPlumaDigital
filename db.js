@@ -16,7 +16,14 @@ db.connect(err => {
         'Error al conectar a MySQL:', err);
       return;
     }
-    console.log('Conexión exitosa a MySQL');
+    db.query("SET NAMES utf8mb4", err => {
+      if (err) {
+        console.error('Error al establecer utf8mb4:', err);
+      } else {
+        console.log('Conexión exitosa a MySQL con utf8mb4');
+      }
+    });
+  
   });
 
   module.exports=db;

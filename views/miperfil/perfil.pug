@@ -35,15 +35,14 @@ block content
             thead
                 tr
                     th Posicion
-                    th Nombre
                     th Foto
-                    th Cantidad
+                    th Nombre
             tbody
                 each ranking in rankings
                     tr
-                        td= ranking.ranking
-                        td= ranking.Titulo
+                        td.centrarElementos 
+                          h1= ranking.ranking
                         td
                             a(href=`/libros/ver/${ranking.idLibro}`) 
                                 img(src=ranking.Foto, alt="Portada", class="portada-img", style="width: 150px; height: 200px; margin-bottom: 20px;")
-                        td= ranking.contador
+                        td= ranking.Titulo

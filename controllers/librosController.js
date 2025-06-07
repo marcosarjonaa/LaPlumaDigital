@@ -183,3 +183,42 @@ exports.ver = (req, res) => {
         })
     }
 }
+
+exports.buscar = (req, res) => {
+    const busqueda = req.body.busqueda.trim()
+    if (busqueda=="" || busqueda==" "){
+        return res.send("Error por busqueda vacia")
+    }
+    db.query(
+        'SELECT * FROM Libros WHERE LOWER(titulo)=?', [busqueda.toLowerCase()], (error, libros) => {
+            if(error){
+                return res.send('Fallo en la busqueda de libros')
+            }
+            else {
+                if (libros.length === 1) {
+                    const libro = libros[0];
+                    if (libro.Fecha) {
+                        libro.Fecha = moment(libro.Fecha).format('YYYY-MM-DD');
+                      }else {
+                        return res.send("El libro con id: "+ libro.idLibro + 
+                            "El libro no tiene fecha. Por favor eliminalo de la bbdd"
+                        );
+                    } 
+                    db.query('SELECT Nombre FROM Autores WHERE idAutor=?', [libro.idAutor], (error, nombre) => {
+                        if(error){
+                            return res.send("Fallo a la hora de encontrar el autor")
+                        }
+                        if(nombre.length === 1) {
+                            res.render('libros/ver', { libro: libro, autor: nombre[0].Nombre })
+                        } else {
+                            return res.send("Fallo a la hora de encontrar el autor")
+                        }
+                        }
+                    )
+                }else {
+                    return res.send('Ha habido un fallo con la busqueda del libro. Intentalo de nuevo')
+                }
+            }
+        }
+    )
+}

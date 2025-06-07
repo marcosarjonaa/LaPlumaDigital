@@ -1,0 +1,38 @@
+extends ../templates/layout
+
+block head
+
+block content
+  div.centro
+    div.tamano
+      h1 Registrate con nosotros
+      form(action="/subeTuLibro", method="post")
+        label(for="Autor") Nombre del escritor:
+        input(type="text", name="Autor")
+        br
+        br
+        label(for="Titulo") Titulo:
+        input(type="text", name="Titulo")
+        br
+        br
+        label(for="Sinapsis") Sinapsis:
+        input(type="text", name="Descripcion")
+        br
+        br
+        label(for="Descripcion") Descripción:
+        input(type="text", name="Descripcion")
+        br
+        br
+        label(for="Paginas") Páginas:
+        input(type="number", name="Paginas")
+        br
+        br
+        label(for="Fecha") Fecha de publicación:
+        input(type="date", name="Fecha")
+        br
+        br
+        label(for="Foto") Foto (URL): 
+        input(type="text", name="Foto") 
+        br
+        br
+        input.enlace-registrar(type="submit", value="Envia tu libro")

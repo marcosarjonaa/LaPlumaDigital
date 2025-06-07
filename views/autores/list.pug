@@ -7,6 +7,11 @@ block content
         div.autores-container
             h2.titulo-libros Listado de Autores
             h4 ¡Encuentra tus autores favoritos!
+            div.tamano
+                form(action="/autores/verAutores", method="POST")
+                    h3 Busca aquí a tu autor favorito(Nombre completo)
+                    input(type="text", name="nombre", placeholder="Buscar...", required)
+                    button(type="submit").enlace-enviar2 Buscar
             table.tabla-autores(border='1', cellpadding='10', cellspacing='0')
                 thead
                     tr
