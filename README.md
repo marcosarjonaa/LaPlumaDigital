@@ -155,7 +155,7 @@ Para este proyecto usaré NodeJs para el backend, y Pug como herramienta para el
 
 - Autores
 
-![autores secuencia](/public/images/autorSecuencia.png)
+![autores secuencia](/publicPu/images/autorSecuencia.png)
 
 - Publicaciones: 
 
@@ -164,21 +164,6 @@ Para este proyecto usaré NodeJs para el backend, y Pug como herramienta para el
 ### 4. Implementaciones, Tecnologías y Código
 
 El proyecto sigue una arquitectura MVC (Modelo-Vista-Controlador), separando de forma clara la lógica de negocio, la gestión de vistas y el acceso a datos:
-
-- **Modelos**: Definidos de forma implícita en base a las tablas de la base de datos (Autores, Libros, Usuarios, etc.).
-- **Vistas**: Usando **Pug** como motor de plantillas para generar HTML dinámico.
-- **Controladores**: Manejando la lógica de las rutas y operaciones con la base de datos mediante **Node.js** y **MySQL**.
-
-En cuanto a tecnologías, he usado algunas como: 
-| Tecnología         | Uso Principal                                         |
-|--------------------|------------------------------------------------------|
-| **Node.js**        | Backend y servidor principal                         |
-| **Express.js**     | Framework para la gestión de rutas y middleware      |
-| **MySQL**          | Base de datos relacional para persistencia           |
-| **Pug**            | Motor de plantillas para vistas                      |
-| **Moment.js**      | Manejo y formato de fechas                           |
-| **JWT** | Autenticación y autorización de usuarios         |
-| **bcryptjs**       | Encriptación de contraseñas                          |
 
 En cuanto a la explicación de codigo, voy a explicar un tipo de archivo por cada categoría: 
 
