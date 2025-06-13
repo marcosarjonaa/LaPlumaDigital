@@ -5,22 +5,25 @@ block head
 block content
   div.centro
     div.tamano
-      h1 Registrate con nosotros
+      h1 ¡Sube tu Libro!
       form(action="/subeTuLibro", method="post")
-        label(for="Autor") Nombre del escritor:
+        label(for="Autor") Nombre del escritor:           
         input(type="text", name="Autor")
         br
         br
-        label(for="Titulo") Titulo:
+        label(for="Titulo") Titulo:         
         input(type="text", name="Titulo")
         br
         br
-        label(for="Sinapsis") Sinapsis:
-        input(type="text", name="Descripcion")
+        div.editor-container
+          label(for="Sinapsis") Sinapsis:
+          textarea(id="sinapsisEditor", name="Sinapsis", rows="5", placeholder="Escribe aquí la sinapsis usando Markdown...")
+          p.markdown-guide Usa los botones de arriba para dar formato (negrita, cursiva, etc.) o el botón "Guía" para ver la sintaxis Markdown.
         br
-        br
-        label(for="Descripcion") Descripción:
-        input(type="text", name="Descripcion")
+        div.editor-container
+          label(for="Descripcion") Descripcion: 
+          textarea(id="descripcionEditor", name="Descripcion", rows="10", placeholder="Escribe la descripción completa usando Markdown...") 
+          p.markdown-guide Usa los botones de arriba para dar formato (negrita, cursiva, etc.) o el botón "Guía" para ver la sintaxis Markdown.
         br
         br
         label(for="Paginas") Páginas:
@@ -36,3 +39,30 @@ block content
         br
         br
         input.enlace-registrar(type="submit", value="Envia tu libro")
+
+block scripts
+  script.
+    const easyMDESinapsis = new EasyMDE({
+      element: document.getElementById('sinapsisEditor'),
+      spellChecker: false,
+      forceSync: true,
+      showIcons: ['code', 'table', 'horizontal-rule', 'side-by-side', 'fullscreen', 'guide'], 
+      toolbar: ["bold", "italic", "heading", "|", "quote", "unordered-list", "ordered-list", "|", "link", "image", "|", "preview", "side-by-side", "fullscreen", "guide"],
+      placeholder: "Escribe un resumen breve de tu libro aquí...",
+      minHeight: "100px"
+    });
+
+    const easyMDEDescripcion = new EasyMDE({
+      element: document.getElementById('descripcionEditor'), 
+      spellChecker: false,
+      forceSync: true,
+      showIcons: ['code', 'table', 'horizontal-rule', 'side-by-side', 'fullscreen', 'guide'],
+      toolbar: ["bold", "italic", "heading", "|", "quote", "unordered-list", "ordered-list", "|", "link", "image", "|", "preview", "side-by-side", "fullscreen", "guide"],
+      placeholder: "Escribe la descripción completa de tu libro aquí...",
+      minHeight: "200px" 
+    });
+
+    document.querySelector('form').addEventListener('submit', function() {
+        easyMDESinapsis.value(); 
+        easyMDEDescripcion.value();
+    });

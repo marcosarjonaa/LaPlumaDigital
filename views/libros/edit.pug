@@ -4,31 +4,65 @@ block head
 
 block content 
     h3 Editar un libro
-    div 
-        form(method="post") 
-            input(type="hidden", name="id", value=`${libro.idLibro}`)
-            label(for="idAutor") Autor:
-            select(name="idAutor")
-                each autor in autores
-                    option(value=`${autor.idAutor}`)= autor.Nombre
-            br
-            label(for="Titulo") Titulo:
-            input(type="text", name="Titulo", value=`${libro.Titulo}`)
-            br
-            label(for="Sinapsis") Sinapsis: 
-            input(type="text", name="Sinapsis",value=`${libro.Sinapsis}`) 
-            br
-            label(for="Descripcion") Descripcion: 
-            input(type="text", name="Descripcion",value=`${libro.Sinapsis}`) 
-            br
-            label(for="Paginas") Paginas:
-            input(type="number", name="Paginas", value=`${libro.Paginas}`)
-            br
-            label(for="Fecha") Fecha de publicación:
-            input(type="date", name="Fecha", value=`${libro.Fecha}`)
-            br
-            label(for="Foto") Foto:
-            input(type="text", name="Foto", value=`${libro.Foto}`)
-            br
+     div.centro
+        div.tamano
+            form(method="post") 
+                input(type="hidden", name="id", value=`${libro.idLibro}`)
+                label(for="idAutor") Autor:
+                select(name="idAutor")
+                    each autor in autores
+                        option(value=`${autor.idAutor}`)= autor.Nombre
+                br
+                label(for="Titulo") Titulo:
+                input(type="text", name="Titulo", value=`${libro.Titulo}`)
+                br
+                div.editor-container
+                    label(for="Sinapsis") Sinapsis:
+                    textarea(id="sinapsisEditor", name="Sinapsis", rows="5", placeholder="Escribe aquí la sinapsis usando Markdown...")= libro.Sinapsis
+                    .markdown-guide
+                    p Usa los botones de arriba para dar formato (negrita, cursiva, etc.) o el botón "Guía" para ver la sintaxis Markdown.
+                br
+                div.editor-container
+                    label(for="Descripcion") Descripcion: 
+                    textarea(id="descripcionEditor", name="Descripcion", rows="10", placeholder="Escribe la descripción completa usando Markdown...")= libro.Descripcion 
+                    .markdown-guide
+                    p Usa los botones de arriba para dar formato (negrita, cursiva, etc.) o el botón "Guía" para ver la sintaxis Markdown.
+                br 
+                label(for="Paginas") Paginas:
+                input(type="number", name="Paginas", value=`${libro.Paginas}`)
+                br
+                label(for="Fecha") Fecha de publicación:
+                input(type="date", name="Fecha", value=`${libro.Fecha}`)
+                br
+                label(for="Foto") Foto:
+                input(type="text", name="Foto", value=`${libro.Foto}`)
+                br
 
-            input(type="submit", value="Enviar")
+                input(type="submit", value="Enviar")
+
+block scripts
+  script.
+    const easyMDESinapsis = new EasyMDE({
+      element: document.getElementById('sinapsisEditor'),
+      spellChecker: false,
+      forceSync: true,
+      showIcons: ['code', 'table', 'horizontal-rule', 'side-by-side', 'fullscreen', 'guide'], 
+      toolbar: ["bold", "italic", "heading", "|", "quote", "unordered-list", "ordered-list", "|", "link", "image", "|", "preview", "side-by-side", "fullscreen", "guide"],
+      placeholder: "Escribe un resumen breve de tu libro aquí...",
+      minHeight: "100px"
+    });
+
+    const easyMDEDescripcion = new EasyMDE({
+      element: document.getElementById('descripcionEditor'), 
+      spellChecker: false,
+      forceSync: true,
+      showIcons: ['code', 'table', 'horizontal-rule', 'side-by-side', 'fullscreen', 'guide'],
+      toolbar: ["bold", "italic", "heading", "|", "quote", "unordered-list", "ordered-list", "|", "link", "image", "|", "preview", "side-by-side", "fullscreen", "guide"],
+      placeholder: "Escribe la descripción completa de tu libro aquí...",
+      minHeight: "200px" 
+    });
+
+    document.querySelector('form').addEventListener('submit', function() {
+        easyMDESinapsis.value(); 
+        easyMDEDescripcion.value();
+    });

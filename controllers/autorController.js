@@ -68,7 +68,7 @@ exports.edit = (req, res) => {
                 }
                     res.render('autores/edit', { autor});
                 } else {
-                  res.send('Error actualizando el utor, el id es incoherente');
+                  res.send('Error actualizando el utor, el id es incoherente');1
                 }
               }
         })
@@ -164,9 +164,41 @@ exports.ver = (req, res) => {
                       autor.FechaNac = moment(autor.FechaNac).format('YYYY-MM-DD');
                       if(autor.FechaFal){
                         autor.FechaFal = moment(autor.FechaFal).format('YYYY-MM-DD')
-                        res.render('autores/ver', { autor: autor, fechaFal: autor.FechaFal});
+                        db.query('SELECT * FROM Libros WHERE idAutor=?', [autor.idAutor], (error, libros) => {
+                            if(error){
+                                return res.send("Fallo a la hora de encontrar libros del autor")
+                            }
+                            if(libros.length > 0) {
+                                libros.forEach(libro => {
+                                    if(libro.Fecha){
+                                        libro.Fecha = moment(libro.Fecha).format("YYYY-MM-DD");
+                                    }else {
+                                        return res.send("El libro con id: "+ libro.idLibro + 
+                                            " no tiene fecha. Por favor eliminalo de la bbdd"
+                                        );
+                                    }
+                                });
+                                res.render('autores/ver', { autor: autor, libros: libros, fechaFal: autor.fechaFal});
+                            }
+                        })
                         }else {
-                            res.render('autores/ver', { autor: autor, fechaFal: "Actualidad"});
+                            db.query('SELECT * FROM Libros WHERE idAutor=?', [autor.idAutor], (error, libros) => {
+                                if(error){
+                                    return res.send("Fallo a la hora de encontrar libros del autor")
+                                }
+                                if(libros.length > 0) {
+                                    libros.forEach(libro => {
+                                        if(libro.Fecha){
+                                            libro.Fecha = moment(libro.Fecha).format("YYYY-MM-DD");
+                                        }else {
+                                            return res.send("El libro con id: "+ libro.idLibro + 
+                                                " no tiene fecha. Por favor eliminalo de la bbdd"
+                                            );
+                                        }
+                                    });
+                                    res.render('autores/ver', { autor: autor, libros: libros, fechaFal: "Actualidad"});
+                                }
+                            })
                         }
                     }else {
                       res.send("El autor con id: "+ autor.idAutor + 
@@ -229,4 +261,53 @@ exports.buscar = (req, res) => {
             }
         }
     )
+}
+
+exports.publicar = (req, res) => {
+    const id = req.params.id;
+    if (isNaN(id)) {
+        res.send('Error buscando la id: ' + id)
+    } else {
+        db.query('SELECT * FROM Libros WHERE idLibro=?', [id], (error, respuesta) => {
+            if (error) {
+                res.send("Ha habido un fallo buscando el libro"+ error)
+            } else {
+                if (respuesta.length > 0) {
+                    const libro = respuesta[0];
+                    if (libro.Fecha) {
+                      libro.Fecha = moment(libro.Fecha).format('YYYY-MM-DD');
+                    }else {
+                      res.send("El libro con id: "+ libro.idLibro + 
+                          "El libro no tiene fecha. Por favor eliminalo de la bbdd"
+                      );
+                    }
+                    res.render('autores/publicar', { libro: libro});
+                } else {
+                    res.send('Error actualizando el libro, el id es int');
+                  }
+            }
+        })
+    }
+}
+
+exports.publicarPost = (req, res) => {
+    const {idLibro, idAutor, Titulo, Contenido} = req.body;
+    const idUsuario = req.user.idUsuario;
+    db.query('SELECT Foto from Libros WHERE idLibro=?', [idLibro], (error, respuesta) => {
+        if(error){
+            return res.send('Este es el error '+error)
+        }
+        const libro = respuesta[0]
+        db.query(
+            'INSERT INTO Publicaciones (idUsuario, idLibro, idAutor, Titulo, Contenido, Foto) VALUES (?, ?, ?, ?, ?, ?)', 
+            [idUsuario, idLibro, idAutor, Titulo, Contenido, libro.Foto],
+            (error, respuesta) => {
+                if(error) {
+                    res.send("Error insertando unA publicacion"+ error)
+                } else {
+                    res.redirect('/')
+                }
+            }
+        ); 
+})
 }

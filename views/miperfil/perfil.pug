@@ -1,15 +1,18 @@
 extends ../templates/layout
 
 block content
+  div.tamano
+    form(action="/perfil/verPerfil", method="POST")
+      h3 Busca aquí un perfil (Username completo)
+      input(type="text", name="busqueda", placeholder="Buscar...", required)
+      button(type="submit").enlace-enviar2 Buscar
   div.perfil-wrapper
     div.perfil-header
       img(src=usuario.Foto, alt="ImagenUsuario", class="foto-perfil")
-      h1= "¡Bienvenido a tu perfil " + usuario.Nombre + "!"
-
+      h1= "¡Bienvenido al perfil, " + usuario.Nombre + "!"
     div.perfil-body
       div.descripcion
         | #{usuario.Descripcion}
-
       div.publicaciones
         table
           thead
@@ -23,12 +26,13 @@ block content
                   | #{publicacion.Titulo}
               tr 
                 td(colspan="2")= publicacion.Contenido
-              tr 
-                td.final(colspan="2")
-                  img(src=publicacion.Foto, alt="ImagenUsuario", class="foto-publicacion")
-                  form(method="POST", action=`/perfil/del/${publicacion.idPublicaciones}`)
-                      button.enlace-borrar2(type="submit") Borrar
-                  hr
+              if tipo == 'Modder' ||  tipo == 'Admin'
+                tr 
+                  td.final(colspan="2")
+                    img(src=publicacion.Foto, alt="ImagenUsuario", class="foto-publicacion")
+                    form(method="POST", action=`/perfil/del/${publicacion.idPublicaciones}`)
+                        button.enlace-borrar2(type="submit") Borrar
+                    hr
       div.descripcion
         h3 🏆 Ranking personal 🏆
         table(border="1", cellpadding="10", cellspacing="0")

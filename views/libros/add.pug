@@ -1,42 +1,75 @@
 extends ../templates/layout
 
 block head
-
+  // Puedes añadir cualquier CSS específico para esta página aquí si lo necesitas.
 
 block content
   div.centro
-      div.tamano        
-        h3 Añadir un nuevo libro
-        div
-          form(action="/libros/add", method="post")
-            label(for="idAutor") Autor:
-            select(name="idAutor")
-              each autor in autores
-                option(value=autor.idAutor)= autor.Nombre
-            br
-            br
-            label(for="Titulo") Titulo:
-            input(type="text", name="Titulo")
-            br
-            br
+    div.tamano        
+      h3 Añadir un nuevo libro
+      div
+        form(action="/libros/add", method="post")
+          label(for="idAutor") Autor:
+          select(name="idAutor")
+            each autor in autores
+              option(value=autor.idAutor)= autor.Nombre
+          br
+          br
+          label(for="Titulo") Titulo:
+          input(type="text", name="Titulo")
+          br
+          br
+          
+          // Campo para Sinapsis con EasyMDE
+          div.editor-container
             label(for="Sinapsis") Sinapsis:
-            input(type="text", name="Sinapsis")
-            br
-            br
+            textarea(id="sinapsisEditor", name="Sinapsis", rows="5", placeholder="Escribe aquí un resumen breve usando Markdown..." value=`${libro.Sinapsis}`)
+          br
+          
+          // Campo para Descripcion con EasyMDE
+          div.editor-container
             label(for="Descripcion") Descripcion: 
-            input(type="text", name="Descripcion") 
-            br
-            br 
-            label(for="Paginas") Paginas: 
-            input(type="number", name="Paginas")
-            br
-            br
-            label(for="Fecha") Fecha Publicación:
-            input(type="date", name="Fecha")
-            br
-            br
-            label(for="Foto") Foto: 
-            input(type="text", name="Foto") 
-            br
-            br
-            input.enlace-registrar(type="submit", value="Enviar")
+            textarea(id="descripcionEditor", name="Descripcion", rows="10", placeholder="Escribe la descripción completa usando Markdown..." value=`${libro.Descripcion}`) 
+          br
+          label(for="Paginas") Paginas: 
+          input(type="number", name="Paginas")
+          br
+          br
+          label(for="Fecha") Fecha Publicación:
+          input(type="date", name="Fecha")
+          br
+          br
+          label(for="Foto") Foto: (URL)
+          input(type="text", name="Foto") 
+          br
+          br
+          input.enlace-registrar(type="submit", value="Enviar")
+
+block scripts
+  script.
+    const easyMDESinapsis = new EasyMDE({
+      element: document.getElementById('sinapsisEditor'),
+      spellChecker: false,
+      forceSync: true,
+      showIcons: ['code', 'table', 'horizontal-rule', 'side-by-side', 'fullscreen', 'guide'],
+      toolbar: ["bold", "italic", "heading", "|", "quote", "unordered-list", "ordered-list", "|", "link", "image", "|", "preview", "side-by-side", "fullscreen", "guide"],
+      placeholder: "Escribe un resumen breve de tu libro aquí...",
+      minHeight: "100px"
+    });
+
+    const easyMDEDescripcion = new EasyMDE({
+      element: document.getElementById('descripcionEditor'),
+      spellChecker: false,
+      forceSync: true,
+      showIcons: ['code', 'table', 'horizontal-rule', 'side-by-side', 'fullscreen', 'guide'],
+      toolbar: ["bold", "italic", "heading", "|", "quote", "unordered-list", "ordered-list", "|", "link", "image", "|", "preview", "side-by-side", "fullscreen", "guide"],
+      placeholder: "Escribe la descripción completa de tu libro aquí...",
+      minHeight: "200px"  
+    });
+
+    // Opcional pero recomendado: Asegurar que los editores sincronicen sus valores al enviar el formulario
+    // `forceSync: true` ya lo hace, pero esto puede servir como una doble verificación.
+    document.querySelector('form').addEventListener('submit', function() {
+        easyMDESinapsis.value(); // Fuerza la actualización del textarea oculto
+        easyMDEDescripcion.value(); // Fuerza la actualización del textarea oculto
+    });

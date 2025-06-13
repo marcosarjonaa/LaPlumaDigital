@@ -5,7 +5,8 @@ block head
 
 block content 
     h3 Borrar un libro
-        div 
+    div.centro
+        div.tamano
             form(method="post") 
                 label(for="idAutor") Autor: 
                 input(type="text", name="nombreAutor", value=`${autor.Nombre}`, disabled) 

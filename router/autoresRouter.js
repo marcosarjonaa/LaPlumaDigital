@@ -23,4 +23,8 @@ router.get('/ver/:id', autorController.ver)
 //Ruta para buscar un Autor según nombre
 router.post('/verAutores', autorController.buscar)
 
+router.get('/publicar/:id', autorController.publicar)
+router.post('/publicar/:id', autorController.publicarPost)
+
+
 module.exports = router

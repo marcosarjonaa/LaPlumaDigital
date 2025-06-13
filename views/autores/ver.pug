@@ -8,3 +8,25 @@ block content
         div.detalle
             img(src=autor.Foto, alt="Portada", class="portada-img", style="max-width: 400px; margin-bottom: 20px;")
             p= autor.Nombre + " vivió desde " + autor.FechaNac + "-" + `${fechaFal}`
+        div.tamano
+            table.tabla-libros(border='1', cellpadding='10', cellspacing='0')
+                thead
+                    tr
+                        th Título
+                        th Sinapsis
+                        th Portada
+                        th Ver 
+                        th Publicar
+                tbody 
+                    each libro in libros
+                        tr 
+                            td
+                                h2= libro.Titulo                        
+                            td
+                                h4=libro.Sinapsis
+                            td
+                                img(src=libro.Foto, alt="Portada", class="portada-img", style="width: 225px; height: 300px; margin-bottom: 20px;")
+                            td 
+                                a.enlace-ver(href=`/libros/ver/${libro.idLibro}`) Ver más detalle
+                            td 
+                                a.enlace-ver(href=`/autores/publicar/${libro.idLibro}`) Hacer una publicación 

@@ -1,0 +1,18 @@
+extends ../templates/layout
+
+block head
+
+block content
+  h3 Añadir un nuevo Autor
+  div.centro
+    div.tamano
+        form(action="/autores/publicar/:id", method="post")
+            input(type="hidden", name="idLibro", value=`${libro.idLibro}`)
+            input(type="hidden", name="idAutor", value=`${libro.idAutor}`)
+            label(for="Titulo") Titulo:
+            input(type="text", name="Titulo")
+            br
+            label(for="Contenido") Contenido: 
+            textarea(type="text", name="Contenido") 
+            br
+            input(type="submit", value="Enviar")

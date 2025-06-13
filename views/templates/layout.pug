@@ -1,13 +1,58 @@
 doctype html
 html(lang="es")
   head
+    // Tu CSS principal
     link(rel="stylesheet", href="/css/styles.css")
-    block head
+    // CSS de EasyMDE
+    link(rel="stylesheet", href="https://unpkg.com/easymde/dist/easymde.min.css")
+    // Estilos personalizados para el editor, si los necesitas
+    style.
+      .editor-container {
+        margin-bottom: 15px;
+      }
+      .editor-container label {
+        display: block;
+        margin-bottom: 5px;
+      }
+      .CodeMirror, .editor-toolbar, .editor-statusbar {
+        border: 1px solid #ccc !important;
+      }
+      .CodeMirror {
+        height: auto !important;
+        min-height: 100px;
+      }
+      .CodeMirror-scroll {
+        overflow: auto;
+      }
+      .markdown-guide {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 10px;
+        background-color: #f9f9f9;
+        border: 1px solid #eee;
+        padding: 10px;
+        border-radius: 5px;
+      }
+      .markdown-guide ul {
+        list-style: none;
+        padding: 0;
+      }
+      .markdown-guide li {
+        margin-bottom: 5px;
+      }
+      .markdown-guide code {
+        background-color: #e8e8e8;
+        padding: 2px 4px;
+        border-radius: 3px;
+        font-family: monospace;
+      }
+    block head 
   body
-    // Incluye el encabezado
     include header
 
-    // Bloque de contenido dinámico
     block content
 
     include footer
+
+    script(src="https://unpkg.com/easymde/dist/easymde.min.js")
+    block scripts 
