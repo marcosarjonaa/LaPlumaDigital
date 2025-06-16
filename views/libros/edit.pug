@@ -18,13 +18,13 @@ block content
                 br
                 div.editor-container
                     label(for="Sinapsis") Sinapsis:
-                    textarea(id="sinapsisEditor", name="Sinapsis", rows="5", placeholder="Escribe aquí la sinapsis usando Markdown...")= libro.Sinapsis
+                    textarea(id="sinapsisEditor", name="Sinapsis", rows="5", placeholder="Escribe aquí la sinapsis usando Markdown...") !{libro.Sinapsis}
                     .markdown-guide
                     p Usa los botones de arriba para dar formato (negrita, cursiva, etc.) o el botón "Guía" para ver la sintaxis Markdown.
                 br
                 div.editor-container
                     label(for="Descripcion") Descripcion: 
-                    textarea(id="descripcionEditor", name="Descripcion", rows="10", placeholder="Escribe la descripción completa usando Markdown...")= libro.Descripcion 
+                    textarea(id="descripcionEditor", name="Descripcion", rows="10", placeholder="Escribe la descripción completa usando Markdown...") !{libro.Descripcion} 
                     .markdown-guide
                     p Usa los botones de arriba para dar formato (negrita, cursiva, etc.) o el botón "Guía" para ver la sintaxis Markdown.
                 br 

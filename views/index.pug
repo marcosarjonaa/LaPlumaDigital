@@ -21,6 +21,7 @@ block content
                 tr 
                   td.final(colspan="2")
                     img(src=publicacion.fotoLibro, alt="ImagenUsuario", class="foto-publicacion")
-                    form(method="POST", action=`/perfil/del/${publicacion.idPublicaciones}`)
+                    if tipo == 'Modder' || tipo == 'Admin'
+                      form(method="POST", action=`/perfil/del/${publicacion.idPublicaciones}`)
                         button.enlace-borrar2(type="submit") Borrar
                     hr
